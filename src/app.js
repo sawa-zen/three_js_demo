@@ -71,13 +71,13 @@ class App {
 
     // プレイヤー
     this.player = new Player();
-    this.player.velocity = new Vector2D(30, 20);
+    this.player.velocity = new Vector2D(300, 200);
     this.scene.add(this.player);
 
     // 敵
     this.enemy = new Enemy();
-    this.enemy.pos = new Vector2D(-200, 300);
-    this.player.velocity = new Vector2D(20, 30);
+    //this.enemy.pos = new Vector2D(-200, 300);
+    //this.player.velocity = new Vector2D(20, 30);
     this.scene.add(this.enemy);
 
     // フレーム毎のレンダーを登録

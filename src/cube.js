@@ -21,9 +21,9 @@ export default class Cube extends THREE.Mesh {
     this.WRAP = 'wrap';
     this.BOUNCE = 'bounce';
     this._mass = 1.0;
-    this._maxSpeed = 10;
+    this._maxSpeed = 20;
     this._position = new Vector2D();
-    this._velocity = new Vector2D(0, 0);
+    this._velocity = new Vector2D();
     this._edgeBehavior = this.BOUNCE;
 
   }
@@ -38,9 +38,9 @@ export default class Cube extends THREE.Mesh {
     this._position = this._position.add(this._velocity);
 
     // 画面の端での処理をする
-    if(this._edgeBehavior == this.WRAP) {
+    if(this._edgeBehavior === this.WRAP) {
       this.wrap();
-    } else if (this._edgeBehavior == this.BOUNCE) {
+    } else if (this._edgeBehavior === this.BOUNCE) {
       this.bounce();
     }
 
