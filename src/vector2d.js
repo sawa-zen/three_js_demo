@@ -92,7 +92,7 @@ export default class Vector2D {
    * ベクトルの大きさを指定した値以下にする
    */
   truncate(max) {
-    this.length = Math.min(max, length);
+    this.length = Math.min(max, this.length);
     return this;
   }
 

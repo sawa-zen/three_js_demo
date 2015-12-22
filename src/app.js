@@ -1,5 +1,6 @@
 import Player from './player.js';
 import Enemy from './enemy.js';
+import Vector2D from './vector2d.js';
 
 class App {
 
@@ -70,16 +71,14 @@ class App {
 
     // プレイヤー
     this.player = new Player();
+    this.player.velocity = new Vector2D(30, 20);
     this.scene.add(this.player);
-    this.stage.addEventListener('mousemove', (e) => {
-      this.player.position.x = e.offsetY - (this.stageHeight / 2);
-      this.player.position.z = -(e.offsetX - (this.stageWidth / 2));
-    });
 
-
+    /*
     // 敵
     this.enemy = new Enemy();
     this.scene.add(this.enemy);
+    */
 
 
     // フレーム毎のレンダーを登録
@@ -92,8 +91,7 @@ class App {
    */
   render() {
     requestAnimationFrame(_.bind(this.render, this));
-    this.player.rotate();
-    this.enemy.rotate();
+    this.player.update();
     this.renderer.render(this.scene, this.camera);
   }
 
