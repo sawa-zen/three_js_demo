@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run watch & http-server -p 8888",
-    "watch": "tsc --out public/js/bundle.js src/Main.ts --watch --sourcemap",
+    "watch": "watchify src/Main.ts -p [tsify] -o public/js/bundle.js -v -d",
     "postinstall": "typings install"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "browserify": "^13.0.1",
+    "tsify": "^0.15.5",
     "typescript": "^1.8.10",
     "typings": "^1.0.4",
     "watchify": "^3.7.0"
