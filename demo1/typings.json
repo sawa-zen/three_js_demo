@@ -1,0 +1,8 @@
+{
+  "name": "demo1",
+  "version": false,
+  "dependencies": {},
+  "ambientDependencies": {
+    "three": "registry:dt/three#0.0.0+20160517065351"
+  }
+}
