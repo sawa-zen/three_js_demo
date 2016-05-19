@@ -1,2 +1,2 @@
 # three_js_demo
-Three.jsを使った操舵行動サンプルです。
+Three.jsを使ったサンプル集です。
