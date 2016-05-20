@@ -43,7 +43,7 @@ class Main {
     this._scene.add(light);
 
     // 地面
-    let planeTexture = THREE.ImageUtils.loadTexture("img/tile.png");
+    let planeTexture = THREE.ImageUtils.loadTexture("assets/texture/tile.png");
     planeTexture.wrapS = planeTexture.wrapT = THREE.RepeatWrapping;
     planeTexture.repeat.set(16, 16);
     let planeGeometry = new THREE.PlaneGeometry(100, 100, 1, 1);
@@ -58,6 +58,20 @@ class Main {
     let plane = new THREE.Mesh(planeGeometry, planeMaterial);
     plane.rotation.x = 90 * Math.PI / 180;
     this._scene.add(plane);
+
+
+    var manager = new THREE.LoadingManager();
+    manager.onProgress = function ( item, loaded, total ) {
+        console.log( item, loaded, total );
+    };
+
+    var loader = new THREE.OBJLoader(manager);
+    loader.load( 'assets/obj/sawazen.obj', ( object:THREE.Object3D ) => {
+      object.scale.x = object.scale.y = object.scale.z = 2;
+      //object.position.y = 95;
+      this._scene.add( object );
+    });
+
 
     this._tick();
   }
