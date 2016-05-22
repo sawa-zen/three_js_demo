@@ -1,22 +1,12 @@
-# Blender MTL File: 'sawazen.blend'
-# Material Count: 2
+# Blender MTL File: 'sawazen2.blend'
+# Material Count: 1
 
-newmtl Material.002
+newmtl Material
 Ns 96.078431
 Ka 1.000000 1.000000 1.000000
-Kd 0.122341 0.436580 0.664616
-Ks 0.000000 0.000000 0.000000
+Kd 0.004812 0.000000 0.640000
+Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
-illum 1
-
-newmtl Material.003
-Ns 96.078431
-Ka 1.000000 1.000000 1.000000
-Kd 0.717016 0.431584 0.053301
-Ks 0.000000 0.000000 0.000000
-Ke 0.000000 0.000000 0.000000
-Ni 1.000000
-d 1.000000
-illum 1
+illum 2
