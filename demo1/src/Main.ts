@@ -28,13 +28,10 @@ class Main {
     this._camera = new Camera();
 
     // レンダラー
-    let rendererW = window.innerWidth / window.devicePixelRatio;
-    let rendererH = window.innerHeight / window.devicePixelRatio;
     this._renderer = new THREE.WebGLRenderer({antialias: true});
     this._renderer.setClearColor(0x83a3b7);
-    this._renderer.setSize(rendererW, rendererH);
-    this._renderer.domElement.style.width = '100%';
-    this._renderer.domElement.style.height = '100%';
+    this._renderer.setSize(window.innerWidth, window.innerHeight);
+    this._renderer.setPixelRatio(window.devicePixelRatio/2);
     document.body.appendChild(this._renderer.domElement);
 
     // 環境光
