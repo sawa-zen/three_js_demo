@@ -54,23 +54,26 @@ class Main {
     });
     let plane = new THREE.Mesh(planeGeometry, planeMaterial);
     plane.rotation.x = 90 * Math.PI / 180;
+    plane.receiveShadow = true;
     this._scene.add(plane);
 
 
-    var manager = new THREE.LoadingManager();
-    manager.onProgress = function ( item, loaded, total ) {
-        console.log( item, loaded, total );
-    };
-
-    var loader = new THREE.OBJLoader(manager);
-    loader.load( 'assets/obj/sawazen.obj', ( object:THREE.Object3D ) => {
-      object.scale.x = object.scale.y = object.scale.z = 2;
-      //object.position.y = 95;
-      this._scene.add( object );
-    });
+    // モデル
+    let group = new THREE.Object3D();
+    let loader = new THREE.JSONLoader();
+    loader.load( 'assets/obj/sawazen2.json', ( geometry, materials ) => {
+      console.log(materials);
+      let faceMaterial = new THREE.MeshFaceMaterial(materials);
+      let json = new THREE.Mesh( geometry, faceMaterial );
+      json.castShadow = true;
+      json.scale.set(2, 2, 2);
+      group.add(json);
+      this._scene.add(group);
+    } );
 
 
     this._tick();
+
   }
 
   /**
