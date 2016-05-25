@@ -31,7 +31,7 @@ class Main {
     this._renderer = new THREE.WebGLRenderer({antialias: true});
     this._renderer.setClearColor(0x83a3b7);
     this._renderer.setSize(window.innerWidth, window.innerHeight);
-    this._renderer.setPixelRatio(window.devicePixelRatio/2);
+    this._renderer.setPixelRatio(window.devicePixelRatio);
     document.body.appendChild(this._renderer.domElement);
 
     // 環境光
@@ -59,16 +59,13 @@ class Main {
 
 
     // モデル
-    let group = new THREE.Object3D();
     let loader = new THREE.JSONLoader();
     loader.load( 'assets/obj/sawazen2.json', ( geometry, materials ) => {
-      console.log(materials);
       let faceMaterial = new THREE.MeshFaceMaterial(materials);
       let json = new THREE.Mesh( geometry, faceMaterial );
       json.castShadow = true;
-      json.scale.set(2, 2, 2);
-      group.add(json);
-      this._scene.add(group);
+      json.scale.set(1.5, 1.5, 1.5);
+      this._scene.add(json);
     } );
 
 
