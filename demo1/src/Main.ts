@@ -1,5 +1,6 @@
 import Camera from './Camera';
 import Plane from './Plane';
+import Model from './Model';
 
 window.addEventListener('load', () => {
   new Main();
@@ -16,6 +17,8 @@ class Main {
   private _camera:Camera;
   /** 地面オブジェクトです。 */
   private _plane:Plane;
+  /** モデルオブジェクトです。 */
+  private _chara:Model;
   /** レンダラーオブジェクトです。 */
   private _renderer:THREE.WebGLRenderer;
 
@@ -39,7 +42,6 @@ class Main {
 
     // 環境光
     let light = new THREE.DirectionalLight(0x999999, 1.6);
-    light.castShadow = true;
     this._scene.add(light);
 
     // 地面
@@ -48,17 +50,14 @@ class Main {
 
     // モデル
     let loader = new THREE.JSONLoader();
-    loader.load( 'assets/obj/sawazen2.json', ( geometry, materials ) => {
-      let faceMaterial = new THREE.MultiMaterial(materials);
-      let json = new THREE.Mesh( geometry, faceMaterial );
-      json.castShadow = true;
-      json.scale.set(1.5, 1.5, 1.5);
-      this._scene.add(json);
-    } );
-
+    loader.load(
+      'assets/obj/sawazen2.json',
+      (geometry:THREE.Geometry, materials:Array<THREE.Material>) => {
+        this._onLoadModel(geometry, materials);
+      }
+    );
 
     this._tick();
-
   }
 
   /**
@@ -71,6 +70,14 @@ class Main {
     this._camera.update();
 
     this._renderer.render(this._scene, this._camera);
+  }
+
+  /**
+   * モデル読み込み完了時のハンドラーです。
+   */
+  protected _onLoadModel(geometry:THREE.Geometry, materials:Array<THREE.Material>) {
+    this._chara = new Model(geometry, materials);
+    this._scene.add(this._chara);
   }
 
 }

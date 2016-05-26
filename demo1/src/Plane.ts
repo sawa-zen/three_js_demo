@@ -11,25 +11,25 @@ export default class Plane extends THREE.Object3D {
     super();
 
     // Geometry
-    let planeGeometry = new THREE.PlaneGeometry(100, 100, 1, 1);
+    let geometry = new THREE.PlaneGeometry(100, 100, 1, 1);
 
     // Material
-    let planeTexture = THREE.ImageUtils.loadTexture("assets/texture/tile.png");
-    planeTexture.wrapS = planeTexture.wrapT = THREE.RepeatWrapping;
-    planeTexture.repeat.set(16, 16);
-    let planeMaterial = new THREE.MeshPhongMaterial({
-      map: planeTexture,
-      bumpMap: planeTexture,
+    let texture = THREE.ImageUtils.loadTexture("assets/texture/tile.png");
+    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+    texture.repeat.set(16, 16);
+    let material = new THREE.MeshPhongMaterial({
+      map: texture,
+      bumpMap: texture,
       bumpScale: 0.2,
       shininess: 3,
-      specularMap: planeTexture,
-      side: THREE.DoubleSide
+      specularMap: texture
     });
 
-    let plane = new THREE.Mesh(planeGeometry, planeMaterial);
-    plane.rotation.x = 90 * Math.PI / 180;
-    plane.receiveShadow = true;
-    this.add(plane);
+    // Mesh
+    let mesh = new THREE.Mesh(geometry, material);
+    mesh.rotation.x = -90 * Math.PI / 180;
+    mesh.receiveShadow = true;
+    this.add(mesh);
   }
 
 }
