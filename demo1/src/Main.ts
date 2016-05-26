@@ -36,23 +36,22 @@ class Main {
     // レンダラー
     this._renderer = new THREE.WebGLRenderer({antialias: true});
     this._renderer.setClearColor(0x83a3b7);
-    this._renderer.setSize(window.innerWidth, window.innerHeight);
-    this._renderer.setPixelRatio(window.devicePixelRatio / 2);
+    this._renderer.setSize(500, 500);
     document.body.appendChild(this._renderer.domElement);
 
     // 環境光
-    let light = new THREE.DirectionalLight(0x999999, 1.6);
+    let light = new THREE.DirectionalLight(0xffffff, 1);
     this._scene.add(light);
 
     // 地面
     this._plane = new Plane();
     this._scene.add(this._plane);
 
-    // モデル
+    // モデルのロード
     let loader = new THREE.JSONLoader();
     loader.load(
       'assets/obj/sawazen2.json',
-      (geometry:THREE.Geometry, materials:Array<THREE.Material>) => {
+      (geometry:THREE.Geometry, materials:Array<THREE.MeshBasicMaterial>) => {
         this._onLoadModel(geometry, materials);
       }
     );
@@ -75,8 +74,9 @@ class Main {
   /**
    * モデル読み込み完了時のハンドラーです。
    */
-  protected _onLoadModel(geometry:THREE.Geometry, materials:Array<THREE.Material>) {
+  protected _onLoadModel(geometry:THREE.Geometry, materials:Array<THREE.MeshBasicMaterial>) {
     this._chara = new Model(geometry, materials);
+    this._chara.scale.set(10, 10, 10);
     this._scene.add(this._chara);
   }
 

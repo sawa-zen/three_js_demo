@@ -11,7 +11,7 @@ export default class Plane extends THREE.Object3D {
     super();
 
     // Geometry
-    let geometry = new THREE.PlaneGeometry(100, 100, 1, 1);
+    let geometry = new THREE.PlaneGeometry(1000, 1000, 10, 10);
 
     // Material
     let texture = THREE.ImageUtils.loadTexture("assets/texture/tile.png");
