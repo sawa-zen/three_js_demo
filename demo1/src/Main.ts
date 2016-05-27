@@ -36,7 +36,7 @@ class Main {
     // レンダラー
     this._renderer = new THREE.WebGLRenderer({antialias: true});
     this._renderer.setClearColor(0x83a3b7);
-    this._renderer.setSize(500, 500);
+    this._renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(this._renderer.domElement);
 
     // 環境光

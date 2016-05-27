@@ -43,11 +43,9 @@ export default class Model extends THREE.Object3D {
   private _createEdgeMaterial():THREE.ShaderMaterial {
     return new THREE.ShaderMaterial({
       vertexShader: `
-        uniform bool edge;
-        varying vec3 vNormal;
         void main(void) {
             vec3 pos = position;
-            pos += normal * 0.07;
+            pos += normal * 0.05;
             gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
         }
       `,
