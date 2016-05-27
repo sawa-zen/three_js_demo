@@ -8,7 +8,10 @@
   },
   "exclude": [
     "node_modules",
-    "typings/main",
+    "typings/",
     "typings/main.d.ts"
+  ],
+  "files": [
+    "typings/index.d.ts"
   ]
 }
