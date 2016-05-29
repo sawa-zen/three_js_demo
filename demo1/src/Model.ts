@@ -17,10 +17,14 @@ export default class Model extends THREE.Object3D {
 
     // 本体
     this._mesh = new THREE.Mesh(geometry, this._createBodyMaterial(materials));
+    this._mesh.castShadow = true;
+    this._mesh.receiveShadow = true;
     this.add(this._mesh);
 
     // エッジ
     this._edgeMesh = new THREE.Mesh(geometry, this._createEdgeMaterial());
+    this._edgeMesh.castShadow = true;
+    this._edgeMesh.receiveShadow = true;
     this.add(this._edgeMesh);
   }
 

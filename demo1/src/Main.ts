@@ -40,11 +40,21 @@ class Main {
     document.body.appendChild(this._renderer.domElement);
 
     // 環境光
-    let light = new THREE.DirectionalLight(0xffffff, 1);
+    let light = new THREE.DirectionalLight(0x999999, 1);
     this._scene.add(light);
+
+    // スポットライト
+    var spotLight = new THREE.SpotLight( 0xffffff );
+    spotLight.position.set( 10, 50, 30 );
+    spotLight.castShadow = true;
+    spotLight.shadow.mapSize.width = 1024;
+    spotLight.shadow.mapSize.height = 1024;
+    this._scene.add( spotLight );
 
     // 地面
     this._plane = new Plane();
+    this._plane.receiveShadow = true;
+    this._plane.castShadow = true;
     this._scene.add(this._plane);
 
     // モデルのロード
@@ -77,6 +87,8 @@ class Main {
   protected _onLoadModel(geometry:THREE.Geometry, materials:Array<THREE.MeshBasicMaterial>) {
     this._chara = new Model(geometry, materials);
     this._chara.scale.set(10, 10, 10);
+    this._chara.castShadow = true;
+    this._chara.receiveShadow = true;
     this._scene.add(this._chara);
   }
 
