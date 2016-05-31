@@ -66,6 +66,9 @@ class Main {
       }
     );
 
+    // ドラック
+    window.addEventListener('mousemove', (event) => this._onMouseMove(event));
+
     this._tick();
   }
 
@@ -84,12 +87,19 @@ class Main {
   /**
    * モデル読み込み完了時のハンドラーです。
    */
-  protected _onLoadModel(geometry:THREE.Geometry, materials:Array<THREE.MeshBasicMaterial>) {
+  protected _onLoadModel(geometry:THREE.Geometry, materials:Array<THREE.MeshBasicMaterial>):void {
     this._chara = new Model(geometry, materials);
     this._chara.scale.set(10, 10, 10);
     this._chara.castShadow = true;
     this._chara.receiveShadow = true;
     this._scene.add(this._chara);
+  }
+
+  /**
+   * マウスムーブ時のハンドラーです。
+   */
+  protected _onMouseMove(event:MouseEvent):void {
+    this._camera.lotation();
   }
 
 }

@@ -19,10 +19,16 @@ export default class Camera extends THREE.PerspectiveCamera {
   }
 
   /**
+   * 回転させます。
+   */
+  public lotation() {
+    this._angle++;
+  }
+
+  /**
    * 毎フレームの更新をかけます。
    */
   public update() {
-    this._angle += 0.2;
     let lad = this._angle * Math.PI / 180;
     this.position.x = this._radius * Math.sin(lad);
     this.position.z = this._radius * Math.cos(lad);
