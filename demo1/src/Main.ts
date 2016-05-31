@@ -1,6 +1,7 @@
 import Camera from './Camera';
 import Plane from './Plane';
 import Model from './Model';
+import SpotLight from './Spotlight';
 
 window.addEventListener('load', () => {
   new Main();
@@ -44,12 +45,8 @@ class Main {
     this._scene.add(light);
 
     // スポットライト
-    var spotLight = new THREE.SpotLight( 0xffffff );
-    spotLight.position.set( 10, 50, 30 );
-    spotLight.castShadow = true;
-    spotLight.shadow.mapSize.width = 1024;
-    spotLight.shadow.mapSize.height = 1024;
-    this._scene.add( spotLight );
+    var spotLight = new SpotLight();
+    this._scene.add(spotLight);
 
     // 地面
     this._plane = new Plane();
