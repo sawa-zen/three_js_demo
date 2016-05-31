@@ -1,7 +1,7 @@
 import Camera from './Camera';
 import Plane from './Plane';
 import Model from './Model';
-import SpotLight from './Spotlight';
+import SpotLight from './SpotLight';
 
 window.addEventListener('load', () => {
   new Main();
