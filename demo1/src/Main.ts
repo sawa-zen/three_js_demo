@@ -20,6 +20,8 @@ class Main {
   private _plane:Plane;
   /** モデルオブジェクトです。 */
   private _chara:Model;
+  /** スポットライトオブジェクトです。 */
+  private _spotLight:SpotLight;
   /** レンダラーオブジェクトです。 */
   private _renderer:THREE.WebGLRenderer;
 
@@ -45,8 +47,8 @@ class Main {
     this._scene.add(light);
 
     // スポットライト
-    var spotLight = new SpotLight();
-    this._scene.add(spotLight);
+    this._spotLight = SpotLight.getInstance();
+    this._scene.add(this._spotLight);
 
     // 地面
     this._plane = new Plane();
@@ -77,6 +79,8 @@ class Main {
 
     // カメラの更新
     this._camera.update();
+    // スポットライトの更新
+    this._spotLight.update();
 
     this._renderer.render(this._scene, this._camera);
   }
@@ -96,7 +100,7 @@ class Main {
    * マウスムーブ時のハンドラーです。
    */
   protected _onMouseMove(event:MouseEvent):void {
-    this._camera.lotation();
+    //this._camera.lotation();
   }
 
 }

@@ -1,3 +1,5 @@
+import SpotLight from './SpotLight';
+
 /**
  * 3Dモデルクラスです。
  */
@@ -104,7 +106,7 @@ export default class Model extends THREE.Object3D {
           } else {
             tColor = vec4(1.0, 1.0, 1.0, 1.0);
           }
-          float diffuse = clamp(dot(vNormal, lightDirection), 0.0, 1.0);
+          float diffuse = clamp(dot(vNormal, normalize(lightDirection)), 0.0, 1.0);
           vec4 smpColor = texture2D(toonTexture, vec2(diffuse, 0.0));
           gl_FragColor = meshColor * smpColor * tColor;
         }
@@ -112,7 +114,7 @@ export default class Model extends THREE.Object3D {
       uniforms: {
         lightDirection: {
           type: 'v3',
-          value: new THREE.Vector3(-10, 1, -10).normalize()
+          value: SpotLight.getInstance().position
         },
         toonTexture: {
           type: 't',
