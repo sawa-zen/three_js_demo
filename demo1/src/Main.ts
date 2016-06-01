@@ -40,6 +40,7 @@ class Main {
     this._renderer = new THREE.WebGLRenderer({antialias: true});
     this._renderer.setClearColor(0x83a3b7);
     this._renderer.setSize(window.innerWidth, window.innerHeight);
+    this._renderer.shadowMapEnabled = true;
     document.body.appendChild(this._renderer.domElement);
 
     // 環境光
@@ -100,7 +101,7 @@ class Main {
    * マウスムーブ時のハンドラーです。
    */
   protected _onMouseMove(event:MouseEvent):void {
-    //this._camera.lotation();
+    this._camera.lotation();
   }
 
 }
