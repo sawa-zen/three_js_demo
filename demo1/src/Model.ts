@@ -62,7 +62,7 @@ export default class Model extends THREE.Object3D {
       uniforms: {
         edgeColor: {
           type: 'v4',
-          value: new THREE.Vector4(0, 0, 0, 0)
+          value: new THREE.Vector4(0, 0, 0, 1)
         },
       },
       side: THREE.BackSide
@@ -119,7 +119,7 @@ export default class Model extends THREE.Object3D {
         },
         meshColor: {
           type: 'v4',
-          value: new THREE.Vector4(material.color.r, material.color.g, material.color.b, 0)
+          value: new THREE.Vector4(material.color.r, material.color.g, material.color.b, 1)
         }
       }
     });

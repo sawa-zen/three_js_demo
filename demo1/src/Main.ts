@@ -58,7 +58,6 @@ class Main {
 
     // 地面
     this._plane = new Plane();
-    this._plane.receiveShadow = true;
     this._scene.add(this._plane);
 
     // モデルのロード
