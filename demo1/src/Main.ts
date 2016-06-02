@@ -24,8 +24,11 @@ class Main {
   private _spotLight:SpotLight;
   /** レンダラーオブジェクトです。 */
   private _renderer:THREE.WebGLRenderer;
-  /** FPS */
+  /** FPS表示 */
   private _stats:Stats;
+
+  /** フレームカウント */
+  private _frame:number = 0;
 
   /**
    * コンストラクターです。
@@ -56,7 +59,6 @@ class Main {
     // 地面
     this._plane = new Plane();
     this._plane.receiveShadow = true;
-    this._plane.castShadow = true;
     this._scene.add(this._plane);
 
     // モデルのロード
@@ -84,6 +86,8 @@ class Main {
   private _tick() {
     requestAnimationFrame(() => { this._tick() });
 
+    this._frame++;
+
     this._stats.begin();
 
     // カメラの更新
@@ -93,6 +97,10 @@ class Main {
     this._spotLight.update();
 
     this._stats.end();
+
+    if(this._frame % 2) {
+      return;
+    }
 
     this._renderer.render(this._scene, this._camera);
   }

@@ -24,7 +24,6 @@ export default class Model extends THREE.Object3D {
 
     // エッジ
     this._edgeMesh = new THREE.Mesh(geometry, this._createEdgeMaterial());
-    this._edgeMesh.castShadow = true;
     this.add(this._edgeMesh);
   }
 
