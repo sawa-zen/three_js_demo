@@ -22,7 +22,7 @@ export default class Camera extends THREE.PerspectiveCamera {
    * 回転させます。
    */
   public lotation() {
-    this._angle++;
+    this._angle+=0.3;
   }
 
   /**

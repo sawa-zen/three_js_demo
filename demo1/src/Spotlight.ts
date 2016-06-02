@@ -32,7 +32,7 @@ export default class SpotLight extends THREE.SpotLight {
    * 毎フレームの更新をかけます。
    */
   public update() {
-    this._angle++;
+    this._angle--;
     let lad = this._angle * Math.PI / 180;
     this.position.x = this._radius * Math.sin(lad);
     this.position.z = this._radius * Math.cos(lad);
