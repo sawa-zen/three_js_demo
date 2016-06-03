@@ -6,7 +6,7 @@ export default class Camera extends THREE.PerspectiveCamera {
   /** アニメーションに用いる角度の値です。 */
   private _angle:number = 48;
   /** アニメーションの円軌道の半径です。 */
-  private _radius:number = 100;
+  private _radius:number = 170;
 
   /**
    * コンストラクターです。
