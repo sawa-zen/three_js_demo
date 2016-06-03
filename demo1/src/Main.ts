@@ -75,7 +75,7 @@ class Main {
 
     // 左上に表示するようCSSを記述してbody直下に表示
     this._stats = new Stats();
-    document.body.appendChild(this._stats.domElement);
+    document.body.appendChild(this._stats.dom);
 
     this._tick();
   }
