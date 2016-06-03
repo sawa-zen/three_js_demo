@@ -70,7 +70,7 @@ class Main {
     // モデルのロード
     let loader = new THREE.JSONLoader();
     loader.load(
-      'assets/obj/sawazen2.json',
+      'assets/json/sawazen2.json',
       (geometry:THREE.Geometry, materials:Array<THREE.MeshBasicMaterial>) => {
         this._onLoadModel(geometry, materials);
       }
