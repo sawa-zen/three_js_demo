@@ -92,6 +92,7 @@ class Main {
   private _tick() {
     requestAnimationFrame(() => { this._tick() });
 
+    // フレームカウントをインクリメント
     this._frame++;
 
     // カメラの更新
@@ -105,10 +106,11 @@ class Main {
       return;
     }
 
+    // Statsの計測を開始
     this._stats.begin();
-
+    // 描画
     this._renderer.render(this._scene, this._camera);
-
+    // Statsの計測終了
     this._stats.end();
   }
 
