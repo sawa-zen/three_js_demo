@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run watch & http-server -p 8888",
     "build": "browserify src/Main.ts -p [tsify] -o public/js/bundle.js -v -d",
-    "watch": "watchify src/main.ts -p [tsify] -o public/js/bundle.js -v -d",
+    "watch": "watchify src/Main.ts -p [tsify] -o public/js/bundle.js -v -d",
     "postinstall": "typings install"
   },
   "author": "",
