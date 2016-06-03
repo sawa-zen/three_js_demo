@@ -88,21 +88,22 @@ class Main {
 
     this._frame++;
 
-    this._stats.begin();
-
     // カメラの更新
     this._camera.lotation();
     this._camera.update();
     // スポットライトの更新
     this._spotLight.update();
 
-    this._stats.end();
-
+    // FPSを30に
     if(this._frame % 2) {
       return;
     }
 
+    this._stats.begin();
+
     this._renderer.render(this._scene, this._camera);
+
+    this._stats.end();
   }
 
   /**
