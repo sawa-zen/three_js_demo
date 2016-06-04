@@ -17,6 +17,10 @@ export default class Model extends THREE.Object3D {
   constructor(geometry:THREE.Geometry, materials:Array<THREE.MeshBasicMaterial>) {
     super();
 
+    // 法線の狂いを修正
+    geometry.computeVertexNormals();
+    geometry.normalsNeedUpdate = true;
+
     // 本体
     this._mesh = new THREE.Mesh(geometry, this._createBodyMaterial(materials));
     this._mesh.castShadow = true;
