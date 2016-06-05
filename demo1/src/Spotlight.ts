@@ -22,8 +22,8 @@ export default class SpotLight extends THREE.SpotLight {
     super(0xffffff);
     this.position.set( 10, 40, 30 );
     this.castShadow = true;
-    this.shadow.mapSize.width = 256;
-    this.shadow.mapSize.height = 256;
+    this.shadow.mapSize.width = 64;
+    this.shadow.mapSize.height = 64;
 
     SpotLight._instance = this;
   }

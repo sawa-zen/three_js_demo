@@ -23,7 +23,7 @@ export default class Model extends THREE.Object3D {
 
     // 本体
     this._mesh = new THREE.Mesh(geometry, this._createBodyMaterial(materials));
-    this._mesh.castShadow = true;
+    //this._mesh.castShadow = true;
     this.add(this._mesh);
 
     // エッジ

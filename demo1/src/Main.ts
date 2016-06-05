@@ -52,16 +52,16 @@ class Main {
     this._renderer.setClearColor(0x83a3b7);
     this._renderer.setSize(window.innerWidth, window.innerHeight);
     this._renderer.shadowMap.enabled = true;
-    this._renderer.setPixelRatio(1);
+    this._renderer.setPixelRatio(window.devicePixelRatio);
     document.body.appendChild(this._renderer.domElement);
 
     // 環境光
-    let light = new THREE.DirectionalLight(0x999999, 1);
+    let light = new THREE.DirectionalLight(0xffffff, 1);
     this._scene.add(light);
 
     // スポットライト
     this._spotLight = SpotLight.getInstance();
-    this._scene.add(this._spotLight);
+    //this._scene.add(this._spotLight);
 
     // 地面
     this._plane = new Plane();
@@ -120,8 +120,6 @@ class Main {
   protected _onLoadModel(geometry:THREE.Geometry, materials:Array<THREE.MeshBasicMaterial>):void {
     this._chara = new Model(geometry, materials);
     this._chara.scale.set(10, 10, 10);
-    this._chara.castShadow = true;
-    this._chara.receiveShadow = true;
     this._scene.add(this._chara);
   }
 
