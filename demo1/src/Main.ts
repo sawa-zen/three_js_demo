@@ -71,6 +71,7 @@ class Main {
     let loader = new THREE.JSONLoader();
     loader.load(
       'assets/json/sawazen2.json',
+      //'assets/json/miku.json',
       (geometry:THREE.Geometry, materials:Array<THREE.MeshBasicMaterial>) => {
         this._onLoadModel(geometry, materials);
       }
@@ -101,6 +102,11 @@ class Main {
     // スポットライトの更新
     this._spotLight.update();
 
+    if(this._chara) {
+      // キャラ
+      this._chara.update();
+    }
+
     // FPSを30に
     if(this._frame % 2) {
       return;
@@ -119,7 +125,6 @@ class Main {
    */
   protected _onLoadModel(geometry:THREE.Geometry, materials:Array<THREE.MeshBasicMaterial>):void {
     this._chara = new Model(geometry, materials);
-    this._chara.scale.set(10, 10, 10);
     this._scene.add(this._chara);
   }
 

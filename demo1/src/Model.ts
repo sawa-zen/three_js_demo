@@ -6,9 +6,15 @@ import SpotLight from './SpotLight';
 export default class Model extends THREE.Object3D {
 
   /** Mesh */
-  private _mesh:THREE.Mesh;
+  private _mesh:THREE.SkinnedMesh;
+  /** Mixer */
+  private _mixer:THREE.AnimationMixer;
+  /** count */
+  private _clock:THREE.Clock;
   /** 縁線Mesh */
   private _edgeMesh:THREE.Mesh;
+  /** アクション */
+  private _action:any = {};
 
   /**
    * コンストラクター
@@ -21,26 +27,48 @@ export default class Model extends THREE.Object3D {
     geometry.computeVertexNormals();
     geometry.normalsNeedUpdate = true;
 
+    materials.forEach(function(material) {
+      material.skinning = true;
+      console.info(material);
+    });
+
     // 本体
-    this._mesh = new THREE.Mesh(geometry, this._createBodyMaterial(materials));
-    //this._mesh.castShadow = true;
+    //let m = this._createBodyMaterial(materials);
+    let m = new THREE.MeshFaceMaterial(materials);
+    this._mesh = new THREE.SkinnedMesh(geometry, m);
     this.add(this._mesh);
 
     // エッジ
-    this._edgeMesh = new THREE.Mesh(geometry, this._createEdgeMaterial());
-    this.add(this._edgeMesh);
+    //this._edgeMesh = new THREE.Mesh(geometry, this._createEdgeMaterial());
+    //this.add(this._edgeMesh);
+
+    // ボーン
+    let helper = new THREE.SkeletonHelper(this._mesh);
+    //this.add(helper);
+
+    // クロック
+    this._clock = new THREE.Clock();
+
+    // ミキサー
+    this._mixer = new THREE.AnimationMixer(this._mesh);
+    this._action.idle  = this._mixer.clipAction(geometry.animations[2]);
+    this._action.idle.setEffectiveWeight( 1 );
+		this._action.idle.play();
   }
 
   /**
    * 本体用マテリアルを生成します。
    * @return THREE.ShaderMaterial
    */
-  private _createBodyMaterial(materials:Array<THREE.MeshBasicMaterial>):THREE.MultiMaterial {
+  private _createBodyMaterial(materials:Array<THREE.MeshBasicMaterial>):THREE.MeshFaceMaterial {
     let fixMaterials:Array<THREE.ShaderMaterial> = [];
     for (let i=0; i < materials.length; i++) {
-      fixMaterials.push(this._createFaceMaterial(materials[i]));
+      let material:THREE.ShaderMaterial = this._createFaceMaterial(materials[i]);
+      material.needsUpdate = true;
+      material.skinning = true;
+      fixMaterials.push(material);
     }
-    return new THREE.MultiMaterial(fixMaterials);
+    return new THREE.MeshFaceMaterial(fixMaterials);
   }
 
   /**
@@ -125,7 +153,17 @@ export default class Model extends THREE.Object3D {
           type: 'v4',
           value: new THREE.Vector4(material.color.r, material.color.g, material.color.b, 1)
         }
-      }
+      },
+      skinning: true
     });
+  }
+
+  /**
+   * フレーム毎のアニメーション
+   */
+  public update():void {
+    var delta = this._clock.getDelta();
+    var theta = this._clock.getElapsedTime();
+    this._mixer.update(delta*5);
   }
 }
