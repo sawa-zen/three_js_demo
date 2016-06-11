@@ -44,14 +44,14 @@ export default class Model extends THREE.Object3D {
 
     // ボーン
     let helper = new THREE.SkeletonHelper(this._mesh);
-    //this.add(helper);
+    this.add(helper);
 
     // クロック
     this._clock = new THREE.Clock();
 
     // ミキサー
     this._mixer = new THREE.AnimationMixer(this._mesh);
-    this._action.idle  = this._mixer.clipAction(geometry.animations[2]);
+    this._action.idle = this._mixer.clipAction(geometry.animations[0]);
     this._action.idle.setEffectiveWeight( 1 );
 		this._action.idle.play();
   }
