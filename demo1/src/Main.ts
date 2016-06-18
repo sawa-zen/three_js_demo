@@ -35,12 +35,15 @@ class Main {
 
   /** フレームカウント */
   private _frame:number = 0;
+  /** カメラの移動向き */
+  private _moveDirection:string;
 
   /**
    * コンストラクターです。
    * @constructor
    */
   constructor() {
+
     // シーン
     this._scene = new THREE.Scene();
 
@@ -84,6 +87,13 @@ class Main {
     this._stats = new Stats();
     document.body.appendChild(this._stats.dom);
 
+    // Zenpad
+    let zenpad = new Zenpad('myCanvas');
+    this._onPushLeft = this._onPushLeft.bind(this)
+    this._onRelase = this._onRelase.bind(this);
+    zenpad.addEventListener('pushLeft', this._onPushLeft);
+    zenpad.addEventListener('releasePad', this._onRelase);
+
     this._tick();
   }
 
@@ -97,7 +107,9 @@ class Main {
     this._frame++;
 
     // カメラの更新
-    this._camera.lotation();
+    if(this._moveDirection) {
+      this._camera.rotateLeft();
+    }
     this._camera.update();
     // スポットライトの更新
     this._spotLight.update();
@@ -129,10 +141,19 @@ class Main {
   }
 
   /**
-   * マウスムーブ時のハンドラーです。
+   * 左スティックに倒れた時
    */
-  protected _onMouseMove(event:MouseEvent):void {
-    this._camera.lotation();
+  protected _onPushLeft():boolean {
+    this._moveDirection = 'left';
+    return true;
+  }
+
+  /**
+   * スティックを離した際のハンドラーです。
+   */
+  protected _onRelase():boolean {
+    this._moveDirection = null;
+    return true;
   }
 
 }

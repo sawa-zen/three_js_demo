@@ -33,8 +33,8 @@ export default class Model extends THREE.Object3D {
     });
 
     // 本体
-    //let m = this._createBodyMaterial(materials);
-    let m = new THREE.MeshFaceMaterial(materials);
+    let m = this._createBodyMaterial(materials);
+    //let m = new THREE.MeshFaceMaterial(materials);
     this._mesh = new THREE.SkinnedMesh(geometry, m);
     this.add(this._mesh);
 

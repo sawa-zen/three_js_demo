@@ -6,7 +6,10 @@
   <title>demo1</title>
   <script src="//cdnjs.cloudflare.com/ajax/libs/three.js/r77/three.min.js"></script>
   <script src="//threejs.org/examples/js/loaders/OBJLoader.js"></script>
+  <script src="libs/createjs.min.js"></script>
+  <script src="libs/victor.min.js"></script>
   <script src="libs/Stats.js"></script>
+  <script src="libs/zenpad.js"></script>
   <script src="js/bundle.js"></script>
   <style>
     html, body {
@@ -14,11 +17,23 @@
       overflow: hidden;
       margin: 0;
     }
-    canvas {
+
+
+    #renderCanvas {
       position: absolute;
     }
+
+    #myCanvas {
+      position: absolute;
+      width: 100%;
+      height: 200px;
+      bottom: 0;
+    }
+
   </style>
 </head>
 <body>
+  <div id="renderCanvas"></div>
+  <canvas id="myCanvas"></canvas>
 </body>
 </html>
