@@ -130,11 +130,7 @@ export default class Model extends THREE.Object3D {
 
         void main(void) {
           vec4 tColor;
-          if(mapEnable == 1) {
-            tColor = texture2D(map, vUv);
-          } else {
-            tColor = vec4(1.0, 1.0, 1.0, 1.0);
-          }
+          tColor = texture2D(map, vUv);
           float diffuse = clamp(dot(vNormal, normalize(lightDirection)), 0.0, 1.0);
           vec4 smpColor = texture2D(toonTexture, vec2(diffuse, 0.0));
           gl_FragColor = meshColor * smpColor * tColor;
@@ -148,6 +144,10 @@ export default class Model extends THREE.Object3D {
         toonTexture: {
           type: 't',
           value: THREE.ImageUtils.loadTexture('assets/texture/toon.png')
+        },
+        map: {
+          type: 't',
+          value: THREE.ImageUtils.loadTexture('assets/json/miku.png')
         },
         meshColor: {
           type: 'v4',
