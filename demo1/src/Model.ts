@@ -39,8 +39,8 @@ export default class Model extends THREE.Object3D {
     this.add(this._mesh);
 
     // エッジ
-    //this._edgeMesh = new THREE.Mesh(geometry, this._createEdgeMaterial());
-    //this.add(this._edgeMesh);
+    this._edgeMesh = new THREE.Mesh(geometry, this._createEdgeMaterial());
+    this.add(this._edgeMesh);
 
     // ボーン
     let helper = new THREE.SkeletonHelper(this._mesh);
