@@ -90,8 +90,10 @@ class Main {
     // Zenpad
     let zenpad = new Zenpad('myCanvas');
     this._onPushLeft = this._onPushLeft.bind(this)
+    this._onPushRight = this._onPushRight.bind(this)
     this._onRelase = this._onRelase.bind(this);
     zenpad.addEventListener('pushLeft', this._onPushLeft);
+    zenpad.addEventListener('pushRight', this._onPushRight);
     zenpad.addEventListener('releasePad', this._onRelase);
 
     this._tick();
@@ -108,7 +110,7 @@ class Main {
 
     // カメラの更新
     if(this._moveDirection) {
-      this._camera.rotateLeft();
+      this._camera.rotate(this._moveDirection);
     }
     this._camera.update();
     // スポットライトの更新
@@ -145,6 +147,14 @@ class Main {
    */
   protected _onPushLeft():boolean {
     this._moveDirection = 'left';
+    return true;
+  }
+
+  /**
+   * 右スティックに倒れた時
+   */
+  protected _onPushRight():boolean {
+    this._moveDirection = 'right';
     return true;
   }
 

@@ -19,17 +19,15 @@ export default class Camera extends THREE.PerspectiveCamera {
   }
 
   /**
-   * 左に回転させます。
+   * 回転させます。
+   * @param {string} direction
    */
-  public rotateLeft() {
-    this._angle+=3;
-  }
-
-  /**
-   * 右に回転させます。
-   */
-  public rotateRight() {
-    this._angle+=0.3;
+  public rotate(direction:string) {
+    if(direction == "left") {
+      this._angle+=3;
+    } else if(direction == "right") {
+      this._angle-=3;
+    }
   }
 
   /**
