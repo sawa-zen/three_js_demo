@@ -44,7 +44,7 @@ export default class Model extends THREE.Object3D {
 
     // ボーン
     let helper = new THREE.SkeletonHelper(this._mesh);
-    this.add(helper);
+    //this.add(helper);
 
     // クロック
     this._clock = new THREE.Clock();
@@ -147,7 +147,7 @@ export default class Model extends THREE.Object3D {
         },
         map: {
           type: 't',
-          value: THREE.ImageUtils.loadTexture('assets/json/miku.png')
+          value: THREE.ImageUtils.loadTexture('assets/json/zensuke.png')
         },
         meshColor: {
           type: 'v4',
