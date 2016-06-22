@@ -55,7 +55,7 @@ class Main {
     this._renderer.setClearColor(0x83a3b7);
     this._renderer.setSize(window.innerWidth, window.innerHeight);
     this._renderer.shadowMap.enabled = true;
-    this._renderer.setPixelRatio(window.devicePixelRatio);
+    this._renderer.setPixelRatio(1);
     document.body.appendChild(this._renderer.domElement);
 
     // 環境光
