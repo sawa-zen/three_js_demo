@@ -32,6 +32,8 @@ class Main {
   private _renderer:THREE.WebGLRenderer;
   /** FPS表示 */
   private _stats:Stats;
+  /** canvasを追加するDOM */
+  private _renderDom:HTMLElement;
 
   /** フレームカウント */
   private _frame:number = 0;
@@ -51,12 +53,11 @@ class Main {
     this._camera = new Camera();
 
     // レンダラー
+    this._renderDom = document.getElementById('renderCanvas');
     this._renderer = new THREE.WebGLRenderer({antialias: true});
     this._renderer.setClearColor(0x83a3b7);
-    this._renderer.setSize(window.innerWidth, window.innerHeight);
-    this._renderer.shadowMap.enabled = true;
     this._renderer.setPixelRatio(window.devicePixelRatio);
-    document.body.appendChild(this._renderer.domElement);
+    this._renderDom.appendChild(this._renderer.domElement);
 
     // 環境光
     let light = new THREE.DirectionalLight(0xffffff, 1);
@@ -79,9 +80,6 @@ class Main {
       }
     );
 
-    // ドラック
-    //window.addEventListener('mousemove', (event) => this._onMouseMove(event));
-
     // 左上に表示するようCSSを記述してbody直下に表示
     this._stats = new Stats();
     document.body.appendChild(this._stats.dom);
@@ -96,6 +94,13 @@ class Main {
     zenpad.addEventListener('releasePad', this._onRelase);
 
     this._tick();
+
+    // リサイズを監視
+    this._onResize = this._onResize.bind(this);
+    window.addEventListener('resize', this._onResize);
+
+    // 最初にリサイズ処理をかけておく
+    this._resize();
   }
 
   /**
@@ -165,4 +170,19 @@ class Main {
     return true;
   }
 
+  /**
+   * リサイズ時のハンドラーです。
+   */
+  protected _onResize(event:Event):void {
+    this._resize();
+  }
+
+  /**
+   * リサイズ処理
+   */
+  private _resize() {
+    this._renderer.domElement.setAttribute('width', String(this._renderDom.clientWidth));
+    this._renderer.domElement.setAttribute('height', String(this._renderDom.clientHeight));
+    this._renderer.setSize(this._renderDom.clientWidth, this._renderDom.clientHeight);
+  }
 }
