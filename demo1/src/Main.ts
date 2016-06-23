@@ -57,6 +57,7 @@ class Main {
     this._renderer = new THREE.WebGLRenderer({antialias: true});
     this._renderer.setClearColor(0x83a3b7);
     this._renderer.setPixelRatio(window.devicePixelRatio);
+    this._resize();
     this._renderDom.appendChild(this._renderer.domElement);
 
     // 環境光
@@ -99,8 +100,6 @@ class Main {
     this._onResize = this._onResize.bind(this);
     window.addEventListener('resize', this._onResize);
 
-    // 最初にリサイズ処理をかけておく
-    this._resize();
   }
 
   /**
@@ -181,8 +180,13 @@ class Main {
    * リサイズ処理
    */
   private _resize() {
-    this._renderer.domElement.setAttribute('width', String(this._renderDom.clientWidth));
-    this._renderer.domElement.setAttribute('height', String(this._renderDom.clientHeight));
-    this._renderer.setSize(this._renderDom.clientWidth, this._renderDom.clientHeight);
+    console.info(this._renderDom.clientWidth, this._renderDom.clientHeight);
+    let width = this._renderDom.clientWidth;
+    let height = this._renderDom.clientHeight;
+    this._renderer.domElement.setAttribute('width', String(width));
+    this._renderer.domElement.setAttribute('height', String(height));
+    this._renderer.setSize(width, height);
+    this._camera.aspect = width / height;
+    this._camera.updateProjectionMatrix();
   }
 }
