@@ -180,7 +180,6 @@ class Main {
    * リサイズ処理
    */
   private _resize() {
-    console.info(this._renderDom.clientWidth, this._renderDom.clientHeight);
     let width = this._renderDom.clientWidth;
     let height = this._renderDom.clientHeight;
     this._renderer.domElement.setAttribute('width', String(width));

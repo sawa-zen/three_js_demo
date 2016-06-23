@@ -17,7 +17,8 @@ body {
   margin: auto;
   width: 640px;
   height: 480px;
-  border: 15px solid #333333;
+  border: 10px solid #333333;
+  box-sizing: border-box;
 }
 
 #myCanvas {
@@ -26,4 +27,13 @@ body {
   height: 200px;
   bottom: 0;
   opacity: .5;
+}
+
+
+@media only screen and (max-width: 640px) {
+  #renderCanvas {
+    bottom: 220px;
+    width: 100%;
+    height: auto;
+  }
 }
