@@ -51,13 +51,11 @@ export default class Model extends THREE.Object3D {
     this._mixer = new THREE.AnimationMixer(this._mesh);
     this._action.idle = this._mixer.clipAction(geometry.animations[0]);
     this._action.idle.setEffectiveWeight( 1 );
-		this._action.idle.play();
 
     // ミキサー2
     this._mixer2 = new THREE.AnimationMixer(this._edgeMesh);
     this._action.idle2 = this._mixer2.clipAction(geometry.animations[0]);
     this._action.idle2.setEffectiveWeight( 1 );
-		this._action.idle2.play();
   }
 
   /**
@@ -234,8 +232,24 @@ export default class Model extends THREE.Object3D {
   public update():void {
     let delta = this._clock.getDelta();
     let theta = this._clock.getElapsedTime();
+    this._helper.update();
     this._mixer.update(delta*5);
     this._mixer2.update(delta*5);
-    this._helper.update();
+  }
+
+  /**
+   * アニメーションを開始させる
+   */
+  public play():void {
+		this._action.idle.play();
+		this._action.idle2.play();
+  }
+
+  /**
+   * アニメーションを停止させる
+   */
+  public stop():void {
+		this._action.idle.stop();
+		this._action.idle2.stop();
   }
 }

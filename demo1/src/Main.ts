@@ -90,9 +90,13 @@ class Main {
     this._onPushLeft = this._onPushLeft.bind(this)
     this._onPushRight = this._onPushRight.bind(this)
     this._onRelase = this._onRelase.bind(this);
+    this._onClickA = this._onClickA.bind(this);
+    this._onClickB = this._onClickB.bind(this);
     zenpad.addEventListener('pushLeft', this._onPushLeft);
     zenpad.addEventListener('pushRight', this._onPushRight);
     zenpad.addEventListener('releasePad', this._onRelase);
+    zenpad.addEventListener('clickA', this._onClickA);
+    zenpad.addEventListener('clickB', this._onClickB);
 
     this._tick();
 
@@ -166,6 +170,22 @@ class Main {
    */
   protected _onRelase():boolean {
     this._moveDirection = null;
+    return true;
+  }
+
+  /**
+   * Aボタン押下時のハンドラーです。
+   */
+  protected _onClickA():boolean {
+    this._chara.play();
+    return true;
+  }
+
+  /**
+   * Bボタン押下時のハンドラーです。
+   */
+  protected _onClickB():boolean {
+    this._chara.stop();
     return true;
   }
 
