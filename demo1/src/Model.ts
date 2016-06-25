@@ -233,8 +233,8 @@ export default class Model extends THREE.Object3D {
     let delta = this._clock.getDelta();
     let theta = this._clock.getElapsedTime();
     this._helper.update();
-    this._mixer.update(delta*5);
-    this._mixer2.update(delta*5);
+    this._mixer.update(delta);
+    this._mixer2.update(delta);
   }
 
   /**
