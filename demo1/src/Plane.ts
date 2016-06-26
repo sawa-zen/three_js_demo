@@ -18,11 +18,7 @@ export default class Plane extends THREE.Object3D {
     texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
     texture.repeat.set(16, 16);
     let material = new THREE.MeshPhongMaterial({
-      map: texture,
-      bumpMap: texture,
-      bumpScale: 0.2,
-      shininess: 3,
-      specularMap: texture
+      map: texture
     });
 
     // Mesh
