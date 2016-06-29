@@ -43,6 +43,7 @@ export default class Model extends THREE.Object3D {
     // ボーン
     this._helper = new THREE.SkeletonHelper(this._mesh);
     this.add(this._helper);
+    this._helper.update();
 
     // クロック
     this._clock = new THREE.Clock();
