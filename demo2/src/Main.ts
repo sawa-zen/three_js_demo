@@ -1,7 +1,5 @@
 import Camera from './Camera';
-import Plane from './Plane';
-import Model from './Model';
-import SpotLight from './SpotLight';
+import Skin from './Skin';
 
 window.addEventListener('load', () => {
   new Main();
@@ -22,18 +20,14 @@ class Main {
   private _scene:THREE.Scene;
   /** カメラオブジェクトです。 */
   private _camera:Camera;
-  /** 地面オブジェクトです。 */
-  private _plane:Plane;
-  /** モデルオブジェクトです。 */
-  private _chara:Model;
-  /** スポットライトオブジェクトです。 */
-  private _spotLight:SpotLight;
   /** レンダラーオブジェクトです。 */
   private _renderer:THREE.WebGLRenderer;
   /** FPS表示 */
   private _stats:Stats;
   /** canvasを追加するDOM */
   private _renderDom:HTMLElement;
+  /** スキン */
+  private _skin:Skin;
 
   /** フレームカウント */
   private _frame:number = 0;
@@ -61,29 +55,19 @@ class Main {
     this._renderDom.appendChild(this._renderer.domElement);
 
     // 環境光
-    let light = new THREE.DirectionalLight(0xffffff, 1);
+    let aLight = new THREE.AmbientLight(0xaaaaaa);
+    this._scene.add(aLight);
+
+    let light = new THREE.DirectionalLight(0xcccccc, 32);
     this._scene.add(light);
-
-    // スポットライト
-    this._spotLight = SpotLight.getInstance();
-    //this._scene.add(this._spotLight);
-
-    // 地面
-    this._plane = new Plane();
-    this._scene.add(this._plane);
-
-    // モデルのロード
-    let loader = new THREE.JSONLoader();
-    loader.load(
-      'assets/json/zensuke.json',
-      (geometry:THREE.Geometry, materials:Array<THREE.MeshBasicMaterial>) => {
-        this._onLoadModel(geometry, materials);
-      }
-    );
 
     // 左上に表示するようCSSを記述してbody直下に表示
     this._stats = new Stats();
     document.body.appendChild(this._stats.dom);
+
+    // skin
+    this._skin = new Skin();
+    this._scene.add(this._skin);
 
     // Zenpad
     let zenpad = new Zenpad('myCanvas');
@@ -120,13 +104,6 @@ class Main {
       this._camera.rotate(this._moveDirection);
     }
     this._camera.update();
-    // スポットライトの更新
-    this._spotLight.update();
-
-    if(this._chara) {
-      // キャラ
-      this._chara.update();
-    }
 
     // FPSを30に
     if(this._frame % 2) {
@@ -139,14 +116,6 @@ class Main {
     this._renderer.render(this._scene, this._camera);
     // Statsの計測終了
     this._stats.end();
-  }
-
-  /**
-   * モデル読み込み完了時のハンドラーです。
-   */
-  protected _onLoadModel(geometry:THREE.Geometry, materials:Array<THREE.MeshBasicMaterial>):void {
-    this._chara = new Model(geometry, materials);
-    this._scene.add(this._chara);
   }
 
   /**
@@ -177,7 +146,6 @@ class Main {
    * Aボタン押下時のハンドラーです。
    */
   protected _onClickA():boolean {
-    this._chara.play();
     return true;
   }
 
@@ -185,7 +153,6 @@ class Main {
    * Bボタン押下時のハンドラーです。
    */
   protected _onClickB():boolean {
-    this._chara.stop();
     return true;
   }
 
