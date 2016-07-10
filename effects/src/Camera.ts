@@ -3,6 +3,11 @@
  */
 export default class Camera extends THREE.PerspectiveCamera {
 
+  private static _instance:Camera;
+  public static getInstance():Camera {
+    return Camera._instance || new Camera();
+  }
+
   /** アニメーションに用いる角度の値です。 */
   private _angle:number = 0;
   /** アニメーションの円軌道の半径です。 */
@@ -16,6 +21,8 @@ export default class Camera extends THREE.PerspectiveCamera {
     super(45, window.innerWidth / window.innerHeight, 1,  1000);
 
     this.position.set(this._radius, 4, 0);
+
+    Camera._instance = this;
   }
 
   /**

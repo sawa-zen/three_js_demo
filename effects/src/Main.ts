@@ -1,5 +1,6 @@
 import Camera from './Camera';
 import Plane from './Plane';
+import MagmaFlare from './effects/magmaFlare/MagmaFlare';
 
 window.addEventListener('load', () => {
   new Main();
@@ -32,6 +33,9 @@ class Main {
   /** カメラの移動向き */
   private _moveDirection:string;
 
+  /** マグマフレア */
+  private _magmaFlare:MagmaFlare;
+
   /**
    * コンストラクターです。
    * @constructor
@@ -42,7 +46,7 @@ class Main {
     this._scene = new THREE.Scene();
 
     // カメラ
-    this._camera = new Camera();
+    this._camera = Camera.getInstance();
 
     // レンダラー
     this._renderDom = document.getElementById('renderCanvas');
@@ -55,6 +59,10 @@ class Main {
     // 地面
     let plane = new Plane();
     this._scene.add(plane);
+
+    // マグマフレア
+    this._magmaFlare = new MagmaFlare();
+    this._scene.add(this._magmaFlare);
 
     // 左上に表示するようCSSを記述してbody直下に表示
     this._stats = new Stats();
@@ -94,6 +102,8 @@ class Main {
       this._camera.rotate(this._moveDirection);
     }
     this._camera.update();
+
+    this._magmaFlare.update();
 
     // FPSを30に
     if(this._frame % 2) {
