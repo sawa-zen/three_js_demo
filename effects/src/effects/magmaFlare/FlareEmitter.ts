@@ -23,7 +23,7 @@ export default class FlareEmiiter extends THREE.Object3D {
       let flare = new Flare();
       flare.rotation.x = rad;
       flare.rotation.y = rad;
-      flare.rotation.z = rad;
+      flare.rotation.z = rad / 2;
       this.add(flare);
       this._flareList.push(flare);
     }
