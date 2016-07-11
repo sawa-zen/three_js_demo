@@ -29,9 +29,9 @@ export default class InGlow extends THREE.Object3D {
     this._material = new THREE.ShaderMaterial({
       uniforms:
         {
-        "c": {type: "f", value: 1.2},
+        "c": {type: "f", value: 1.0},
         "p": {type: "f", value: 0.9},
-        glowColor: {type: "c", value: new THREE.Color(0xffffff)},
+        glowColor: {type: "c", value: new THREE.Color(0x96ecff)},
         viewVector: {type: "v3", value: camera.position}
       },
       vertexShader: `
