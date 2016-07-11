@@ -1,10 +1,10 @@
 /**
- * マグマ球クラスです。
+ * フレアクラスです。
  */
-export default class Magma extends THREE.Object3D {
+export default class Flare extends THREE.Object3D {
 
   /** ジオメトリ */
-  private _geometry:THREE.SphereGeometry;
+  private _geometry:THREE.TorusGeometry;
   /** カラーマップ */
   private _map:THREE.Texture;
   /** マテリアル */
@@ -20,15 +20,20 @@ export default class Magma extends THREE.Object3D {
     super();
 
     // ジオメトリ
-    this._geometry = new THREE.SphereGeometry(2, 20, 20);
+    this._geometry = new THREE.TorusGeometry(2, 2, 2, 200);
 
     // カラーマップ
-    this._map = THREE.ImageUtils.loadTexture('./assets/texture/magma.png');
+    this._map = THREE.ImageUtils.loadTexture('./assets/texture/aura3_type2.png');
     this._map.wrapS = this._map.wrapT = THREE.RepeatWrapping;
+    this._map.offset.y = Math.random() * 10;
 
     // マテリアル
     this._material = new THREE.MeshBasicMaterial({
-      map: this._map
+      map: this._map,
+      blending: THREE.AdditiveBlending,
+      transparent: true,
+      opacity: 0.2,
+      depthWrite: false
     });
 
     // メッシュ
@@ -44,8 +49,7 @@ export default class Magma extends THREE.Object3D {
    */
   public update() {
     if(this._map) {
-      this._map.offset.x += 0.002;
-      this._map.offset.y += 0.002;
+      this._map.offset.y += 0.015;
     }
   }
 
