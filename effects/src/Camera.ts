@@ -44,7 +44,7 @@ export default class Camera extends THREE.PerspectiveCamera {
     let lad = this._angle * Math.PI / 180;
     this.position.x = this._radius * Math.sin(lad);
     this.position.z = this._radius * Math.cos(lad);
-    this.lookAt(new THREE.Vector3(0, 1.5, 0));
+    this.lookAt(new THREE.Vector3(0, 0, 0));
   }
 
 }
