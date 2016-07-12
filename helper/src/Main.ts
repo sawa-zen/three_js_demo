@@ -2,6 +2,7 @@ import Camera from './Camera';
 
 import ArrowHelper from './helper/ArrowHelper';
 import AxisHelper from './helper/AxisHelper';
+import BoundingBoxHelper from './helper/BoundingBoxHelper';
 
 window.addEventListener('load', () => {
   new Main();
@@ -51,12 +52,24 @@ class Main {
     this._resize();
     document.body.appendChild(this._renderer.domElement);
 
+    // 環境光
+    let ambientLight = new THREE.AmbientLight(0x333333);
+    this._scene.add(ambientLight);
+
+    // 光
+    let directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    directionalLight.position.set(5, 5, 0);
+    this._scene.add(directionalLight);
+
     // // 矢印ヘルパー
     // let arrowHelper = new ArrowHelper();
     // this._scene.add(arrowHelper);
-    // 三軸ヘルパー
-    let axisHelper = new AxisHelper();
-    this._scene.add(axisHelper);
+    // // 三軸ヘルパー
+    // let axisHelper = new AxisHelper();
+    // this._scene.add(axisHelper);
+    // 境界エリアヘルパー
+    let boundingBoxHelper = new BoundingBoxHelper();
+    this._scene.add(boundingBoxHelper);
 
     // 更新処理
     this._tick();
