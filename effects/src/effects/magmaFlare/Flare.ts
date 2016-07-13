@@ -17,6 +17,13 @@ export default class Flare extends THREE.Object3D {
   private _speed:number;
   /** オフセット */
   private _offset:THREE.Vector2 = new THREE.Vector2();
+  /** 上面の半径 */
+  private _topRadius:number;
+  /** 下面の半径 */
+  private _bottomRadius:number;
+
+  /** ランダム係数 */
+  private _randomRatio:number = Math.random() + 1;
 
   /**
    * コンストラクター
@@ -28,7 +35,9 @@ export default class Flare extends THREE.Object3D {
     this._speed = Math.random() * 0.05 + 0.01;
 
     // ジオメトリ
-    this._geometry = new THREE.CylinderGeometry(2, 4, 0, 30, 3, true);
+    this._topRadius = 6;
+    this._bottomRadius = 2;
+    this._geometry = new THREE.CylinderGeometry(this._topRadius, this._bottomRadius, 0, 30, 3, true);
 
     // カラーマップ
     this._map = THREE.ImageUtils.loadTexture('./assets/texture/aura3_type2.png');
@@ -63,15 +72,25 @@ export default class Flare extends THREE.Object3D {
         },
         opacity: {
           type: 'f',
-          value: 0.3
+          value: 0.2
+        },
+        topRadius: {
+          type: 'f',
+          value: this._topRadius
+        },
+        bottomRadius: {
+          type: 'f',
+          value: this._bottomRadius
         }
       },
       vertexShader: `
         varying vec2 vUv;
+        varying float radius;
         uniform vec2 offset;
         void main()
         {
           vUv = uv + offset;
+          radius = length(position);
           vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
           gl_Position = projectionMatrix * mvPosition;
         }
@@ -79,11 +98,18 @@ export default class Flare extends THREE.Object3D {
       fragmentShader: `
         uniform sampler2D map;
         uniform float opacity;
+        uniform float topRadius;
+        uniform float bottomRadius;
         varying vec2 vUv;
+        varying float radius;
+
         void main() {
           vec4 tColor;
           tColor = texture2D(map, vUv);
-          gl_FragColor = tColor * vec4(1.0, 1.0, 1.0, opacity);
+          float width = topRadius - bottomRadius;
+          float rad = 3.14 * (radius - bottomRadius) / width;
+          float o = opacity * sin(rad);
+          gl_FragColor = tColor * vec4(1.0, 1.0, 1.0, o);
         }
       `,
       side: THREE.DoubleSide,
@@ -98,8 +124,8 @@ export default class Flare extends THREE.Object3D {
    * フレーム毎の更新
    */
   public update() {
-    this._offset.x += 0.005;
-    this._offset.y += 0.01;
+    this._offset.x += 0.003 * this._randomRatio;
+    this._offset.y -= 0.01 * this._randomRatio;
   }
 
 }
