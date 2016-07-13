@@ -3,6 +3,7 @@ import Camera from './Camera';
 import ArrowHelper from './helper/ArrowHelper';
 import AxisHelper from './helper/AxisHelper';
 import BoundingBoxHelper from './helper/BoundingBoxHelper';
+import BoxHelper from './helper/BoxHelper';
 
 window.addEventListener('load', () => {
   new Main();
@@ -67,9 +68,12 @@ class Main {
     // // 三軸ヘルパー
     // let axisHelper = new AxisHelper();
     // this._scene.add(axisHelper);
-    // 境界エリアヘルパー
-    let boundingBoxHelper = new BoundingBoxHelper();
-    this._scene.add(boundingBoxHelper);
+    // // 境界エリアヘルパー
+    // let boundingBoxHelper = new BoundingBoxHelper();
+    // this._scene.add(boundingBoxHelper);
+    // ボックスヘルパー
+    let boxHelper = new BoxHelper();
+    this._scene.add(boxHelper);
 
     // 更新処理
     this._tick();
