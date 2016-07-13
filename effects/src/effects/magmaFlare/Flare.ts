@@ -1,3 +1,5 @@
+import Camera from "../../Camera";
+
 /**
  * フレアクラスです。
  */
@@ -13,6 +15,8 @@ export default class Flare extends THREE.Object3D {
   private _mesh:THREE.Mesh;
   /** スピード */
   private _speed:number;
+  /** オフセット */
+  private _offset:THREE.Vector2 = new THREE.Vector2();
 
   /**
    * コンストラクター
@@ -29,19 +33,9 @@ export default class Flare extends THREE.Object3D {
     // カラーマップ
     this._map = THREE.ImageUtils.loadTexture('./assets/texture/aura3_type2.png');
     this._map.wrapS = this._map.wrapT = THREE.RepeatWrapping;
-    this._map.offset.x = Math.random() * 10;
-    this._map.offset.y = Math.random() * 10;
 
     // マテリアル
     this._material = this._createMaterial();
-    // new THREE.MeshBasicMaterial({
-    //   map: this._map,
-    //   blending: THREE.AdditiveBlending,
-    //   transparent: true,
-    //   opacity: 0.3,
-    //   side: THREE.DoubleSide,
-    //   depthWrite: false
-    // });
 
     // メッシュ
     this._mesh = new THREE.Mesh(
@@ -56,38 +50,45 @@ export default class Flare extends THREE.Object3D {
    * @return THREE.ShaderMaterial
    */
   private _createMaterial():THREE.ShaderMaterial {
+    let camera = Camera.getInstance();
     let material = new THREE.ShaderMaterial({
       uniforms: {
-        "c": {type: "f", value: 1.0},
-        "p": {type: "f", value: 0.9},
-        glowColor: {type: "c", value: new THREE.Color(0x96ecff)},
-        viewVector: {type: "v3", value: camera.position}
+        map: {
+          type: 't',
+          value: this._map
+        },
+        offset: {
+          type: 'v2',
+          value: this._offset
+        },
+        opacity: {
+          type: 'f',
+          value: 0.3
+        }
       },
       vertexShader: `
-        uniform vec3 viewVector;
-        uniform float c;
-        uniform float p;
-        varying float intensity;
+        varying vec2 vUv;
+        uniform vec2 offset;
         void main()
         {
-          vec3 vNormal = normalize(normalMatrix * normal);
-          vec3 vNormel = normalize(normalMatrix * viewVector);
-          intensity = pow(c - dot(vNormal, vNormel), p);
-
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+          vUv = uv + offset;
+          vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+          gl_Position = projectionMatrix * mvPosition;
         }
       `,
       fragmentShader: `
         uniform sampler2D map;
+        uniform float opacity;
         varying vec2 vUv;
         void main() {
           vec4 tColor;
           tColor = texture2D(map, vUv);
-          gl_FragColor = tColor;
+          gl_FragColor = tColor * vec4(1.0, 1.0, 1.0, opacity);
         }
       `,
-      side: THREE.FrontSide,
+      side: THREE.DoubleSide,
       blending: THREE.AdditiveBlending,
+      depthWrite: false,
       transparent: true
     });
     return material;
@@ -97,10 +98,8 @@ export default class Flare extends THREE.Object3D {
    * フレーム毎の更新
    */
   public update() {
-    if(this._map) {
-      this._map.offset.x += 0.005;
-      this._map.offset.y += 0.02;
-    }
+    this._offset.x += 0.005;
+    this._offset.y += 0.01;
   }
 
 }
