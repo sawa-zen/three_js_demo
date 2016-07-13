@@ -1,5 +1,5 @@
 /**
- * カメラヘルパークラスです。
+ * 平行光源ヘルパークラスです。
  */
 export default class DirectionalLightHelper extends THREE.Object3D {
 
