@@ -2,6 +2,7 @@ import Magma from './Magma';
 import Aura from './Aura';
 import InGlow from './InGlow';
 import FlareEmitter from './FlareEmitter';
+import SparkEmitter from './SparkEmitter';
 
 /**
  * マグマフレアクラスです。
