@@ -5,6 +5,7 @@ import AxisHelper from './helper/AxisHelper';
 import BoundingBoxHelper from './helper/BoundingBoxHelper';
 import BoxHelper from './helper/BoxHelper';
 import CameraHelper from './helper/CameraHelper';
+import DirectionalLightHelper from './helper/DirectionalLightHelper';
 
 window.addEventListener('load', () => {
   new Main();
@@ -58,7 +59,7 @@ class Main {
     let ambientLight = new THREE.AmbientLight(0x333333);
     this._scene.add(ambientLight);
 
-    // 光
+    // 平行光源
     let directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
     directionalLight.position.set(5, 5, 0);
     this._scene.add(directionalLight);
@@ -75,10 +76,13 @@ class Main {
     // // ボックスヘルパー
     // let boxHelper = new BoxHelper();
     // this._scene.add(boxHelper);
-    // カメラヘルパー
-    let cameraHelper = new CameraHelper();
-    cameraHelper.position.z = 1.5;
-    this._scene.add(cameraHelper);
+    // // カメラヘルパー
+    // let cameraHelper = new CameraHelper();
+    // cameraHelper.position.z = 1.5;
+    // this._scene.add(cameraHelper);
+    // 平行光源ヘルパー
+    let directionalLightHelper = new DirectionalLightHelper();
+    this._scene.add(directionalLightHelper);
 
     // 更新処理
     this._tick();

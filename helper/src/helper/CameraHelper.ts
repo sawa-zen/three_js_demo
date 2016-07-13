@@ -1,5 +1,3 @@
-import Camera from '../Camera';
-
 /**
  * カメラヘルパークラスです。
  */
