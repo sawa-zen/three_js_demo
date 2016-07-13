@@ -42,6 +42,7 @@ export default class Flare extends THREE.Object3D {
     // カラーマップ
     this._map = THREE.ImageUtils.loadTexture('./assets/texture/aura3_type2.png');
     this._map.wrapS = this._map.wrapT = THREE.RepeatWrapping;
+    this._map.repeat.set(10, 10);
 
     // マテリアル
     this._material = this._createMaterial();
@@ -89,7 +90,7 @@ export default class Flare extends THREE.Object3D {
         uniform vec2 offset;
         void main()
         {
-          vUv = uv + offset;
+          vUv = (uv + offset) * vec2(2.0, 2.0);
           radius = length(position);
           vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
           gl_Position = projectionMatrix * mvPosition;
