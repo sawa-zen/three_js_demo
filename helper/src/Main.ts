@@ -8,6 +8,7 @@ import CameraHelper from './helper/CameraHelper';
 import DirectionalLightHelper from './helper/DirectionalLightHelper';
 import EdgesHelper from './helper/EdgesHelper';
 import FaceNormalsHelper from './helper/FaceNormalsHelper';
+import GridHelper from './helper/GridHelper';
 
 window.addEventListener('load', () => {
   new Main();
@@ -88,9 +89,12 @@ class Main {
     // // エッジヘルパー
     // let edgeHelper = new EdgesHelper();
     // this._scene.add(edgeHelper);
-    // 面法線ヘルパー
-    let faceNormalHelper = new FaceNormalsHelper();
-    this._scene.add(faceNormalHelper);
+    // // 面法線ヘルパー
+    // let faceNormalHelper = new FaceNormalsHelper();
+    // this._scene.add(faceNormalHelper);
+    // グリッドヘルパー
+    let gridHelper = new GridHelper();
+    this._scene.add(gridHelper);
 
     // 更新処理
     this._tick();
