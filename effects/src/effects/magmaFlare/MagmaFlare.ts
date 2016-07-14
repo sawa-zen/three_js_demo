@@ -3,6 +3,7 @@ import Aura from './Aura';
 import InGlow from './InGlow';
 import FlareEmitter from './FlareEmitter';
 import SparkEmitter from './SparkEmitter';
+import OutGlow from './OutGlow';
 
 /**
  * マグマフレアクラスです。
@@ -19,6 +20,8 @@ export default class MagmaFlare extends THREE.Object3D {
   private _flareEmitter:FlareEmitter;
   /** スパークエミッター */
   private _sparkEmitter:SparkEmitter;
+  /** 背景グロー */
+  private _outGlow:OutGlow;
 
   /**
    * コンストラクター
@@ -46,6 +49,10 @@ export default class MagmaFlare extends THREE.Object3D {
     // スパーク
     this._sparkEmitter = new SparkEmitter();
     this.add(this._sparkEmitter);
+
+    // アウトグロー
+    this._outGlow = new OutGlow();
+    this.add(this._outGlow);
   }
 
   /**

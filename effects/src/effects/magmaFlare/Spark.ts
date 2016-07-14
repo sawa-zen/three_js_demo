@@ -38,6 +38,7 @@ export default class Spark extends THREE.Object3D {
       map: this._map,
       transparent: true,
       side: THREE.DoubleSide,
+      depthWrite: false,
       blending: THREE.AdditiveBlending,
       opacity: this._opacity
     });
