@@ -73,7 +73,7 @@ export default class Flare extends THREE.Object3D {
         },
         opacity: {
           type: 'f',
-          value: 0.2
+          value: 0.15
         },
         topRadius: {
           type: 'f',

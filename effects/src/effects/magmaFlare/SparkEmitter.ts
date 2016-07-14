@@ -21,8 +21,8 @@ export default class SparkEmitter extends THREE.Object3D {
     for(let i = 0; i < this._sparkNum; i++) {
       let rad = perAngle * i * Math.PI / 180;
       let spark = new Spark();
-      spark.rotation.x = rad;
-      spark.rotation.z = rad * 2;
+      spark.rotation.x = 360 * Math.sin(rad);
+      spark.rotation.z = rad;
       this.add(spark);
       this._sparkList.push(spark);
     }
