@@ -5,8 +5,10 @@ import Spark from './Spark';
  */
 export default class SparkEmitter extends THREE.Object3D {
 
+  /** スパークリスト */
+  private _sparkList:Spark[] = [];
   /** スパークの数 */
-  private sparkNum:number = 40;
+  private _sparkNum:number = 50;
 
   /**
    * コンストラクター
@@ -14,6 +16,25 @@ export default class SparkEmitter extends THREE.Object3D {
    */
   constructor() {
     super();
+
+    let perAngle = 360 / this._sparkNum;
+    for(let i = 0; i < this._sparkNum; i++) {
+      let rad = perAngle * i * Math.PI / 180;
+      let spark = new Spark();
+      spark.rotation.x = i % 2 ? rad : -rad;
+      spark.rotation.z = rad * 2;
+      this.add(spark);
+      this._sparkList.push(spark);
+    }
+  }
+
+  /**
+   * フレーム毎の更新
+   */
+  public update() {
+    this._sparkList.forEach((spark:Spark) => {
+      spark.update();
+    });
   }
 
 }

@@ -6,7 +6,7 @@ import Flare from './Flare';
 export default class FlareEmiiter extends THREE.Object3D {
 
   /** フレアの数 */
-  private _flareNum:number = 15;
+  private _flareNum:number = 10;
   /** フレアリスト */
   private _flareList:Flare[] = [];
 

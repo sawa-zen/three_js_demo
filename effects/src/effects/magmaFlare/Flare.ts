@@ -115,7 +115,7 @@ export default class Flare extends THREE.Object3D {
       `,
       side: THREE.DoubleSide,
       blending: THREE.AdditiveBlending,
-      depthWrite: false,
+      depthTest: false,
       transparent: true
     });
     return material;
