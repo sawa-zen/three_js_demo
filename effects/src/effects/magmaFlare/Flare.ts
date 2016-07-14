@@ -90,7 +90,7 @@ export default class Flare extends THREE.Object3D {
         uniform vec2 offset;
         void main()
         {
-          vUv = (uv + offset) * vec2(2.0, 2.0);
+          vUv = uv + offset;
           radius = length(position);
           vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
           gl_Position = projectionMatrix * mvPosition;
