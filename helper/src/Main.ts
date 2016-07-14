@@ -6,6 +6,7 @@ import BoundingBoxHelper from './helper/BoundingBoxHelper';
 import BoxHelper from './helper/BoxHelper';
 import CameraHelper from './helper/CameraHelper';
 import DirectionalLightHelper from './helper/DirectionalLightHelper';
+import EdgesHelper from './helper/EdgesHelper';
 
 window.addEventListener('load', () => {
   new Main();
@@ -80,9 +81,12 @@ class Main {
     // let cameraHelper = new CameraHelper();
     // cameraHelper.position.z = 1.5;
     // this._scene.add(cameraHelper);
-    // 平行光源ヘルパー
-    let directionalLightHelper = new DirectionalLightHelper();
-    this._scene.add(directionalLightHelper);
+    // // 平行光源ヘルパー
+    // let directionalLightHelper = new DirectionalLightHelper();
+    // this._scene.add(directionalLightHelper);
+    // エッジヘルパー
+    let edgeHelper = new EdgesHelper();
+    this._scene.add(edgeHelper);
 
     // 更新処理
     this._tick();
