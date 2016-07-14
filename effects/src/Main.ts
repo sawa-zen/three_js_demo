@@ -25,8 +25,6 @@ class Main {
   private _renderer:THREE.WebGLRenderer;
   /** FPS表示 */
   private _stats:Stats;
-  /** canvasを追加するDOM */
-  private _renderDom:HTMLElement;
 
   /** フレームカウント */
   private _frame:number = 0;
@@ -49,15 +47,15 @@ class Main {
     this._camera = Camera.getInstance();
 
     // レンダラー
-    this._renderDom = document.getElementById('renderCanvas');
     this._renderer = new THREE.WebGLRenderer({antialias: true});
     this._renderer.setClearColor(0x000000);
     this._renderer.setPixelRatio(window.devicePixelRatio);
     this._resize();
-    this._renderDom.appendChild(this._renderer.domElement);
+    document.body.appendChild(this._renderer.domElement);
 
     // 地面
     let plane = new Plane();
+    plane.position.y = -2;
     this._scene.add(plane);
 
     // マグマフレア
@@ -67,19 +65,6 @@ class Main {
     // 左上に表示するようCSSを記述してbody直下に表示
     this._stats = new Stats();
     document.body.appendChild(this._stats.dom);
-
-    // Zenpad
-    let zenpad = new Zenpad('myCanvas');
-    this._onPushLeft = this._onPushLeft.bind(this)
-    this._onPushRight = this._onPushRight.bind(this)
-    this._onRelase = this._onRelase.bind(this);
-    this._onClickA = this._onClickA.bind(this);
-    this._onClickB = this._onClickB.bind(this);
-    zenpad.addEventListener('pushLeft', this._onPushLeft);
-    zenpad.addEventListener('pushRight', this._onPushRight);
-    zenpad.addEventListener('releasePad', this._onRelase);
-    zenpad.addEventListener('clickA', this._onClickA);
-    zenpad.addEventListener('clickB', this._onClickB);
 
     this._tick();
 
@@ -119,44 +104,6 @@ class Main {
   }
 
   /**
-   * 左スティックに倒れた時
-   */
-  protected _onPushLeft():boolean {
-    this._moveDirection = 'left';
-    return true;
-  }
-
-  /**
-   * 右スティックに倒れた時
-   */
-  protected _onPushRight():boolean {
-    this._moveDirection = 'right';
-    return true;
-  }
-
-  /**
-   * スティックを離した際のハンドラーです。
-   */
-  protected _onRelase():boolean {
-    this._moveDirection = null;
-    return true;
-  }
-
-  /**
-   * Aボタン押下時のハンドラーです。
-   */
-  protected _onClickA():boolean {
-    return true;
-  }
-
-  /**
-   * Bボタン押下時のハンドラーです。
-   */
-  protected _onClickB():boolean {
-    return true;
-  }
-
-  /**
    * リサイズ時のハンドラーです。
    */
   protected _onResize(event:Event):void {
@@ -167,8 +114,8 @@ class Main {
    * リサイズ処理
    */
   private _resize() {
-    let width = this._renderDom.clientWidth;
-    let height = this._renderDom.clientHeight;
+    let width = window.innerWidth;
+    let height = window.innerHeight;
     this._renderer.domElement.setAttribute('width', String(width));
     this._renderer.domElement.setAttribute('height', String(height));
     this._renderer.setSize(width, height);
