@@ -9,6 +9,7 @@ import DirectionalLightHelper from './helper/DirectionalLightHelper';
 import EdgesHelper from './helper/EdgesHelper';
 import FaceNormalsHelper from './helper/FaceNormalsHelper';
 import GridHelper from './helper/GridHelper';
+import VertexNormalsHelper from './helper/VertexNormalsHelper';
 
 window.addEventListener('load', () => {
   new Main();
@@ -92,9 +93,12 @@ class Main {
     // // 面法線ヘルパー
     // let faceNormalHelper = new FaceNormalsHelper();
     // this._scene.add(faceNormalHelper);
-    // グリッドヘルパー
-    let gridHelper = new GridHelper();
-    this._scene.add(gridHelper);
+    // // グリッドヘルパー
+    // let gridHelper = new GridHelper();
+    // this._scene.add(gridHelper);
+    // 頂点ヘルパー
+    let vertexNormalHelper = new VertexNormalsHelper();
+    this._scene.add(vertexNormalHelper);
 
     // 更新処理
     this._tick();
