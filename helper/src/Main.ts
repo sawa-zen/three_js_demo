@@ -10,6 +10,7 @@ import EdgesHelper from './helper/EdgesHelper';
 import FaceNormalsHelper from './helper/FaceNormalsHelper';
 import GridHelper from './helper/GridHelper';
 import VertexNormalsHelper from './helper/VertexNormalsHelper';
+import WireframeHelper from './helper/WireframeHelper';
 
 window.addEventListener('load', () => {
   new Main();
@@ -96,9 +97,12 @@ class Main {
     // // グリッドヘルパー
     // let gridHelper = new GridHelper();
     // this._scene.add(gridHelper);
-    // 頂点ヘルパー
-    let vertexNormalHelper = new VertexNormalsHelper();
-    this._scene.add(vertexNormalHelper);
+    // // 頂点ヘルパー
+    // let vertexNormalHelper = new VertexNormalsHelper();
+    // this._scene.add(vertexNormalHelper);
+    // ワイヤーフレームヘルパー
+    let wireframeHelper = new WireframeHelper();
+    this._scene.add(wireframeHelper);
 
     // 更新処理
     this._tick();
