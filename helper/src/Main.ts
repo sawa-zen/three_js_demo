@@ -11,6 +11,7 @@ import FaceNormalsHelper from './helper/FaceNormalsHelper';
 import GridHelper from './helper/GridHelper';
 import VertexNormalsHelper from './helper/VertexNormalsHelper';
 import WireframeHelper from './helper/WireframeHelper';
+import PointLightHelper from './helper/PointLightHelper';
 
 window.addEventListener('load', () => {
   new Main();
@@ -100,9 +101,12 @@ class Main {
     // // 頂点ヘルパー
     // let vertexNormalHelper = new VertexNormalsHelper();
     // this._scene.add(vertexNormalHelper);
-    // ワイヤーフレームヘルパー
-    let wireframeHelper = new WireframeHelper();
-    this._scene.add(wireframeHelper);
+    // // ワイヤーフレームヘルパー
+    // let wireframeHelper = new WireframeHelper();
+    // this._scene.add(wireframeHelper);
+    // ポイントライトヘルパー
+    let pointLightHelper = new PointLightHelper();
+    this._scene.add(pointLightHelper);
 
     // 更新処理
     this._tick();
