@@ -12,6 +12,7 @@ import GridHelper from './helper/GridHelper';
 import VertexNormalsHelper from './helper/VertexNormalsHelper';
 import WireframeHelper from './helper/WireframeHelper';
 import PointLightHelper from './helper/PointLightHelper';
+import SpotLightHelper from './helper/SpotLightHelper';
 
 window.addEventListener('load', () => {
   new Main();
@@ -104,9 +105,12 @@ class Main {
     // // ワイヤーフレームヘルパー
     // let wireframeHelper = new WireframeHelper();
     // this._scene.add(wireframeHelper);
-    // ポイントライトヘルパー
-    let pointLightHelper = new PointLightHelper();
-    this._scene.add(pointLightHelper);
+    // // ポイントライトヘルパー
+    // let pointLightHelper = new PointLightHelper();
+    // this._scene.add(pointLightHelper);
+    // スポットライトヘルパー
+    let spotLightHelper = new SpotLightHelper();
+    this._scene.add(spotLightHelper);
 
     // 更新処理
     this._tick();
@@ -157,4 +161,5 @@ class Main {
     this._camera.aspect = width / height;
     this._camera.updateProjectionMatrix();
   }
+
 }
