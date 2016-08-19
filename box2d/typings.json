@@ -2,6 +2,7 @@
   "name": "demo1",
   "dependencies": {},
   "globalDependencies": {
+    "box2dweb": "registry:dt/box2dweb#0.0.0+20160317120654",
     "stats": "registry:dt/stats#0.16.0+20160505160752",
     "three": "registry:dt/three#0.0.0+20160523041317"
   }

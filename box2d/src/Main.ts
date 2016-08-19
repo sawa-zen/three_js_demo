@@ -1,6 +1,5 @@
 import Camera from './Camera';
 import Plane from './Plane';
-import MagmaFlare from './effects/magmaFlare/MagmaFlare';
 
 window.addEventListener('load', () => {
   new Main();
@@ -31,8 +30,8 @@ class Main {
   /** カメラの移動向き */
   private _moveDirection:string;
 
-  /** マグマフレア */
-  private _magmaFlare:MagmaFlare;
+  /** box2dワールド */
+  private _b2world:Box2D.Dynamics.b2World;
 
   /**
    * コンストラクターです。
@@ -58,11 +57,7 @@ class Main {
     plane.position.y = -2;
     this._scene.add(plane);
 
-    // マグマフレア
-    this._magmaFlare = new MagmaFlare();
-    this._scene.add(this._magmaFlare);
-
-    // 左上に表示するようCSSを記述してbody直下に表示
+      // 左上に表示するようCSSを記述してbody直下に表示
     this._stats = new Stats();
     document.body.appendChild(this._stats.dom);
 
@@ -71,6 +66,35 @@ class Main {
     // リサイズを監視
     this._onResize = this._onResize.bind(this);
     window.addEventListener('resize', this._onResize);
+
+    this._b2world = new Box2D.Dynamics.b2World(
+      new Box2D.Common.Math.b2Vec2(0, 9.8),
+      true
+    );
+
+    var fixDef = new Box2D.Dynamics.b2FixtureDef; // 入れ物生成
+    fixDef.density = 1.0; // 密度
+    fixDef.friction = 0.5; // 摩擦係数
+    fixDef.restitution = 0.2; // 反発係数
+
+    // 30行目から一番下のラインを引きます
+    var bodyDef = new Box2D.Dynamics.b2BodyDef; // 物体を宣言
+
+    // これは一番下のラインなので動かない
+    bodyDef.type = Box2D.Dynamics.b2Body.b2_staticBody; // 動くやつはb2_dynamicBody
+    fixDef.shape = new Box2D.Collision.Shapes.b2PolygonShape; // 今回は四角形
+
+    // 縦1pxのラインを引く
+    bodyDef.position.Set(0 , 400 / 30); // xとy
+    this._b2world.CreateBody(bodyDef).CreateFixture(fixDef); // 世界に突っ込む
+
+    // 43行目
+    var debugDraw = new Box2D.Dynamics.b2DebugDraw(); // debug用オブジェクト
+    debugDraw.SetSprite(this._renderer.domElement.getContext("2d")); // 描画するcanvasを設定
+    debugDraw.SetDrawScale(30); // この世界のスケールを設定
+    debugDraw.SetFillAlpha(0.5); // 要素の透過度を設定
+    debugDraw.SetFlags(Box2D.Dynamics.b2DebugDraw.e_shapeBit | Box2D.Dynamics.b2DebugDraw.e_jointBit); // 表示する内容を定数で指定
+    this._b2world.SetDebugDraw(debugDraw); // 世界にdebug要素を突っ込む
   }
 
   /**
@@ -88,8 +112,6 @@ class Main {
     }
     this._camera.update();
 
-    this._magmaFlare.update();
-
     // FPSを30に
     if(this._frame % 2) {
       return;
@@ -98,7 +120,7 @@ class Main {
     // Statsの計測を開始
     this._stats.begin();
     // 描画
-    this._renderer.render(this._scene, this._camera);
+    //this._renderer.render(this._scene, this._camera);
     // Statsの計測終了
     this._stats.end();
   }
@@ -119,7 +141,7 @@ class Main {
     this._renderer.domElement.setAttribute('width', String(width));
     this._renderer.domElement.setAttribute('height', String(height));
     this._renderer.setSize(width, height);
-    this._camera.aspect = width / height;
+    //this._camera.aspect = width / height;
     this._camera.updateProjectionMatrix();
   }
 }
