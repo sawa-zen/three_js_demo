@@ -83,9 +83,9 @@ class Main {
     this._frame++;
 
     // カメラの更新
-    if(this._moveDirection) {
-      this._camera.rotate(this._moveDirection);
-    }
+    // if(this._moveDirection) {
+    //   this._camera.rotate(this._moveDirection);
+    // }
     this._camera.update();
 
     this._magmaFlare.update();
