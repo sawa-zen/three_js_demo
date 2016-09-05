@@ -110,7 +110,7 @@ export default class Flare extends THREE.Object3D {
           float width = topRadius - bottomRadius;
           float rad = 3.14 * (radius - bottomRadius) / width;
           float o = opacity * sin(rad);
-          gl_FragColor = tColor * vec4(1.0, 1.0, 1.0, o);
+          gl_FragColor = (tColor + vec4(0.0, 0.0, 0.3, 1.0)) * vec4(1.0, 1.0, 1.0, o);
         }
       `,
       side: THREE.DoubleSide,
