@@ -55,7 +55,7 @@ class Main {
 
     // 地面
     let plane = new Plane();
-    plane.position.y = -2;
+    plane.position.y = -3;
     this._scene.add(plane);
 
     // マグマフレア
