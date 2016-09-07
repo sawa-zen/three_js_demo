@@ -61,10 +61,6 @@ export default class InGlow extends THREE.Object3D {
       transparent: true
     });
 
-    // カスタムシェーダー
-    var customMaterial = new THREE.ShaderMaterial(
-                                                 );
-
     // メッシュ
     this._mesh = new THREE.Mesh(
       this._geometry,

@@ -1,5 +1,3 @@
-import Camera from "../../Camera";
-
 /**
  * フレアクラスです。
  */
@@ -60,7 +58,6 @@ export default class Flare extends THREE.Object3D {
    * @return THREE.ShaderMaterial
    */
   private _createMaterial():THREE.ShaderMaterial {
-    let camera = Camera.getInstance();
     let material = new THREE.ShaderMaterial({
       uniforms: {
         map: {
