@@ -28,21 +28,17 @@ export default class InGlow extends THREE.Object3D {
     // マテリアル
     this._material = new THREE.ShaderMaterial({
       uniforms: {
-        "c": {type: "f", value: 1.0},
-        "p": {type: "f", value: 0.9},
         glowColor: {type: "c", value: new THREE.Color(0x96ecff)},
         viewVector: {type: "v3", value: camera.position}
       },
       vertexShader: `
         uniform vec3 viewVector;
-        uniform float c;
-        uniform float p;
         varying float intensity;
         void main()
         {
-          vec3 vNormal = normalize(normalMatrix * normal);
-          vec3 vNormel = normalize(normalMatrix * viewVector);
-          intensity = pow(c - dot(vNormal, vNormel), p);
+          vec3 vNormal = normalize(normal);
+          vec3 vNormel = normalize(viewVector);
+          intensity = 1.0 - dot(vNormal, vNormel);
 
           gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
         }
