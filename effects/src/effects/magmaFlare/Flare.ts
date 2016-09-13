@@ -86,15 +86,18 @@ export default class Flare extends THREE.Object3D {
         }
       },
       vertexShader: `
-        varying vec2 vUv;
-        varying float radius;
-        uniform vec2 offset;
+        varying vec2 vUv;       // フラグメントシェーダーに渡すUV座標
+        varying float radius;   // フラグメントシェーダーに渡す半径
+        uniform vec2 offset;    // カラーマップのズレ位置
+
         void main()
         {
+          // 本来の一からuvをずらす
           vUv = uv + offset;
+          // 中心から頂点座標までの距離
           radius = length(position);
-          vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-          gl_Position = projectionMatrix * mvPosition;
+          // 3次元上頂点座標を画面上の二次元座標に変換(お決まり)
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
         }
       `,
       fragmentShader: `
