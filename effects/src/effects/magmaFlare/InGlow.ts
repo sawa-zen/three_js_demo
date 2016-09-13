@@ -32,24 +32,29 @@ export default class InGlow extends THREE.Object3D {
         viewVector: {type: "v3", value: camera.position}
       },
       vertexShader: `
-        uniform vec3 viewVector;
-        varying float intensity;
+        uniform vec3 viewVector;    // カメラ位置
+        varying float opacity;      // 透明度
         void main()
         {
-          vec3 vNormal = normalize(normal);
-          vec3 vNormel = normalize(viewVector);
-          intensity = 1.0 - dot(vNormal, vNormel);
+          // 頂点法線ベクトル x
+          vec3 nNomal = normalize(normal);
+          vec3 nViewVec = normalize(viewVector);
 
+          // 透明度
+          opacity = dot(nNomal, nViewVec);
+          // 反転
+          opacity = 1.0 - opacity;
+
+          // お決まり
           gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
         }
       `,
       fragmentShader: `
         uniform vec3 glowColor;
-        varying float intensity;
+        varying float opacity;
         void main()
         {
-          vec3 glow = glowColor * intensity;
-          gl_FragColor = vec4(glow, 1.0);
+          gl_FragColor = vec4(glowColor, opacity);
         }
       `,
       side: THREE.FrontSide,
