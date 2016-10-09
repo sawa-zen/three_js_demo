@@ -42,21 +42,21 @@ export default class Model extends THREE.Object3D {
 
     // ボーン
     this._helper = new THREE.SkeletonHelper(this._mesh);
-    this.add(this._helper);
-    this._helper.update();
+    //this.add(this._helper);
+    //this._helper.update();
 
     // クロック
     this._clock = new THREE.Clock();
 
     // ミキサー
     this._mixer = new THREE.AnimationMixer(this._mesh);
-    this._action.idle = this._mixer.clipAction(geometry.animations[0]);
-    this._action.idle.setEffectiveWeight( 1 );
+    this._action.idle = this._mixer.clipAction(geometry.animations[2]);
+    this._action.idle.setEffectiveWeight(1);
 
     // ミキサー2
     this._mixer2 = new THREE.AnimationMixer(this._edgeMesh);
-    this._action.idle2 = this._mixer2.clipAction(geometry.animations[0]);
-    this._action.idle2.setEffectiveWeight( 1 );
+    this._action.idle2 = this._mixer2.clipAction(geometry.animations[2]);
+    this._action.idle2.setEffectiveWeight(1);
   }
 
   /**
