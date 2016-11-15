@@ -32,26 +32,27 @@ export default class MagmaFlare extends THREE.Object3D {
 
     // マグマ
     this._magma = new Magma();
-    this.add(this._magma);
 
     // オーラ
     this._aura = new Aura();
-    this.add(this._aura);
 
     // イングロー
     this._inGlow = new InGlow();
-    this.add(this._inGlow);
 
     // フレア
     this._flareEmitter = new FlareEmitter();
-    this.add(this._flareEmitter);
 
     // スパーク
     this._sparkEmitter = new SparkEmitter();
-    this.add(this._sparkEmitter);
 
     // アウトグロー
     this._outGlow = new OutGlow();
+
+    this.add(this._magma);
+    this.add(this._aura);
+    this.add(this._inGlow);
+    this.add(this._flareEmitter);
+    this.add(this._sparkEmitter);
     this.add(this._outGlow);
   }
 

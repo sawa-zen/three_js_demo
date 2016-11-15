@@ -1,5 +1,3 @@
-import Camera from "../../Camera";
-
 /**
  * フレアクラスです。
  */
@@ -21,6 +19,8 @@ export default class Flare extends THREE.Object3D {
   private _topRadius:number;
   /** 下面の半径 */
   private _bottomRadius:number;
+  /** ドーナツの太さ */
+  private _diameter:number;
 
   /** ランダム係数 */
   private _randomRatio:number = Math.random() + 1;
@@ -34,9 +34,11 @@ export default class Flare extends THREE.Object3D {
 
     this._speed = Math.random() * 0.05 + 0.01;
 
-    // ジオメトリ
     this._topRadius = 6;
     this._bottomRadius = 2;
+    this._diameter = this._topRadius - this._bottomRadius;
+
+    // ジオメトリ
     this._geometry = new THREE.CylinderGeometry(this._topRadius, this._bottomRadius, 0, 30, 3, true);
 
     // カラーマップ
@@ -60,7 +62,6 @@ export default class Flare extends THREE.Object3D {
    * @return THREE.ShaderMaterial
    */
   private _createMaterial():THREE.ShaderMaterial {
-    let camera = Camera.getInstance();
     let material = new THREE.ShaderMaterial({
       uniforms: {
         map: {
@@ -75,42 +76,49 @@ export default class Flare extends THREE.Object3D {
           type: 'f',
           value: 0.15
         },
-        topRadius: {
-          type: 'f',
-          value: this._topRadius
-        },
-        bottomRadius: {
+        innerRadius: {
           type: 'f',
           value: this._bottomRadius
+        },
+        diameter: {
+          type: 'f',
+          value: this._diameter
         }
       },
       vertexShader: `
-        varying vec2 vUv;
-        varying float radius;
-        uniform vec2 offset;
+        varying vec2 vUv;       // フラグメントシェーダーに渡すUV座標
+        varying float radius;   // フラグメントシェーダーに渡す半径
+        uniform vec2 offset;    // カラーマップのズレ位置
+
         void main()
         {
+          // 本来の一からuvをずらす
           vUv = uv + offset;
+          // 中心から頂点座標までの距離
           radius = length(position);
-          vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-          gl_Position = projectionMatrix * mvPosition;
+          // 3次元上頂点座標を画面上の二次元座標に変換(お決まり)
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
         }
       `,
       fragmentShader: `
-        uniform sampler2D map;
-        uniform float opacity;
-        uniform float topRadius;
-        uniform float bottomRadius;
-        varying vec2 vUv;
-        varying float radius;
+        uniform sampler2D map;      // テクスチャ
+        uniform float opacity;      // 透明度
+        uniform float diameter;     // ドーナツの太さ
+        uniform float innerRadius;  // 内円の半径
+        varying vec2 vUv;           // UV座標
+        varying float radius;       // 中心ドットまでの距離
+        const float PI = 3.1415926; // 円周率
 
         void main() {
-          vec4 tColor;
-          tColor = texture2D(map, vUv);
-          float width = topRadius - bottomRadius;
-          float rad = 3.14 * (radius - bottomRadius) / width;
-          float o = opacity * sin(rad);
-          gl_FragColor = (tColor + vec4(0.0, 0.0, 0.3, 1.0)) * vec4(1.0, 1.0, 1.0, o);
+          // UVの位置からテクスチャの色を取得
+          vec4 tColor = texture2D(map, vUv);
+          // 描画位置がドーナツの幅の何割の位置になるか
+          float ratio = (radius - innerRadius) / diameter;
+          float opacity = opacity * sin(PI * ratio);
+          // ベースカラー
+          vec4 baseColor = (tColor + vec4(0.0, 0.0, 0.3, 1.0));
+          // 透明度を反映させる
+          gl_FragColor = baseColor * vec4(1.0, 1.0, 1.0, opacity);
         }
       `,
       side: THREE.DoubleSide,
