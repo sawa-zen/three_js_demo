@@ -24,7 +24,7 @@ export default class Plane extends THREE.Object3D {
     // Mesh
     let mesh = new THREE.Mesh(geometry, material);
     mesh.rotation.x = -90 * Math.PI / 180;
-    //this.add(mesh);
+    this.add(mesh);
   }
 
 }
