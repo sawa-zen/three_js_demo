@@ -49,7 +49,7 @@ class Main {
     // レンダラー
     this._renderer = new THREE.WebGLRenderer({antialias: true});
     this._renderer.setClearColor(0x000000);
-    this._renderer.setPixelRatio(window.devicePixelRatio);
+    this._renderer.setPixelRatio(1);
     this._resize();
     document.body.appendChild(this._renderer.domElement);
 
