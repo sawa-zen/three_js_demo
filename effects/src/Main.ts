@@ -1,6 +1,6 @@
 import Camera from './Camera';
 import Plane from './Plane';
-import MagmaFlare from './effects/magmaFlare/MagmaFlare';
+import MagmaFlare from './magmaFlare/MagmaFlare';
 
 /**
  * デモのメインクラスです。
