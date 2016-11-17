@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run watch & http-server -p 8888",
+    "start": "npm run lite & npm run watch",
+    "lite": "lite-server",
     "build": "browserify src/Main.ts -p [tsify] -o public/js/bundle.js -v -d",
     "watch": "watchify src/Main.ts -p [tsify] -o public/js/bundle.js -v -d",
     "typings": "typings",
@@ -14,6 +15,7 @@
   "license": "ISC",
   "devDependencies": {
     "browserify": "^13.0.1",
+    "lite-server": "^2.2.2",
     "tsify": "^0.15.5",
     "typescript": "^1.8.10",
     "typings": "^1.0.4",
