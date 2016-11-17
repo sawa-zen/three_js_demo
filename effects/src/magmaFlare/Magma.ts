@@ -23,7 +23,8 @@ export default class Magma extends THREE.Object3D {
     this._geometry = new THREE.SphereGeometry(2, 20, 20);
 
     // カラーマップ
-    this._map = THREE.ImageUtils.loadTexture('./assets/texture/magma.png');
+    let loader = new THREE.TextureLoader();
+    this._map = loader.load('./assets/texture/magma.png');
     this._map.wrapS = this._map.wrapT = THREE.RepeatWrapping;
 
     // マテリアル

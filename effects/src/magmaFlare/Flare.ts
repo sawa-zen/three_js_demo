@@ -42,7 +42,8 @@ export default class Flare extends THREE.Object3D {
     this._geometry = new THREE.CylinderGeometry(this._topRadius, this._bottomRadius, 0, 30, 3, true);
 
     // カラーマップ
-    this._map = THREE.ImageUtils.loadTexture('./assets/texture/aura3_type2.png');
+    let loader = new THREE.TextureLoader();
+    this._map = loader.load('./assets/texture/aura3_type2.png');
     this._map.wrapS = this._map.wrapT = THREE.RepeatWrapping;
     this._map.repeat.set(10, 10);
 

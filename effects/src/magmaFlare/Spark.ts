@@ -30,7 +30,8 @@ export default class Spark extends THREE.Object3D {
     this._geometry = new THREE.PlaneGeometry(0.15, 2);
 
     // カラーマップ
-    this._map = THREE.ImageUtils.loadTexture('./assets/texture/Burst01.png');
+    let loader = new THREE.TextureLoader();
+    this._map = loader.load('./assets/texture/Burst01.png');
     this._map.wrapS = this._map.wrapT = THREE.RepeatWrapping;
 
     // マテリアル

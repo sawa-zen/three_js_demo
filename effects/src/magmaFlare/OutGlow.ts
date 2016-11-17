@@ -14,7 +14,8 @@ export default class OutGlow extends THREE.Object3D {
     super();
 
     // テクスチャ
-    let map = THREE.ImageUtils.loadTexture('./assets/texture/Particle01.png');
+    let loader = new THREE.TextureLoader();
+    let map = loader.load('./assets/texture/Particle01.png');
 
     // マテリアル
     let material = new THREE.SpriteMaterial({
