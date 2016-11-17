@@ -2,16 +2,6 @@ import Camera from './Camera';
 import Plane from './Plane';
 import MagmaFlare from './effects/magmaFlare/MagmaFlare';
 
-window.addEventListener('load', () => {
-  new Main();
-});
-
-document.addEventListener('touchmove', function(e) {
-  if (window.innerHeight >= document.body.scrollHeight) {
-    e.preventDefault();
-  }
-}, false);
-
 /**
  * デモのメインクラスです。
  */
@@ -83,9 +73,6 @@ class Main {
     this._frame++;
 
     // カメラの更新
-    // if(this._moveDirection) {
-    //   this._camera.rotate(this._moveDirection);
-    // }
     this._camera.update();
 
     this._magmaFlare.update();
@@ -123,3 +110,7 @@ class Main {
     this._camera.updateProjectionMatrix();
   }
 }
+
+window.addEventListener('load', () => {
+  new Main();
+});

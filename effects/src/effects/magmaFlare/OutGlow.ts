@@ -30,5 +30,4 @@ export default class OutGlow extends THREE.Object3D {
     this._sprite.scale.multiplyScalar(11);
     this.add(this._sprite);
   }
-
 }

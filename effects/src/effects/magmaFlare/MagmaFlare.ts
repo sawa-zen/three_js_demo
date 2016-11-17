@@ -65,5 +65,4 @@ export default class MagmaFlare extends THREE.Object3D {
     this._flareEmitter.update();
     this._sparkEmitter.update();
   }
-
 }

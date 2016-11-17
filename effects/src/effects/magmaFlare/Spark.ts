@@ -64,5 +64,4 @@ export default class Spark extends THREE.Object3D {
       this._mesh.material.opacity = this._opacity;
     }
   }
-
 }

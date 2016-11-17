@@ -69,5 +69,4 @@ export default class InGlow extends THREE.Object3D {
     );
     this.add(this._mesh);
   }
-
 }

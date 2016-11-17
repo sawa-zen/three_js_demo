@@ -136,5 +136,4 @@ export default class Flare extends THREE.Object3D {
     this._offset.x += 0.004 * this._randomRatio;
     this._offset.y -= 0.015 * this._randomRatio;
   }
-
 }

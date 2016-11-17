@@ -36,5 +36,4 @@ export default class SparkEmitter extends THREE.Object3D {
       spark.update();
     });
   }
-
 }

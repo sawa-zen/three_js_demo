@@ -48,5 +48,4 @@ export default class Magma extends THREE.Object3D {
       this._map.offset.y += 0.008;
     }
   }
-
 }

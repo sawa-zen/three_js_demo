@@ -37,5 +37,4 @@ export default class FlareEmiiter extends THREE.Object3D {
       flare.update();
     });
   }
-
 }

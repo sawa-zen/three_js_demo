@@ -51,5 +51,4 @@ export default class Aura extends THREE.Object3D {
       this._map.offset.y -= 0.005;
     }
   }
-
 }
