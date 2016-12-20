@@ -24,9 +24,9 @@ export default class Camera extends THREE.PerspectiveCamera {
    */
   public rotate(direction:string) {
     if(direction == "left") {
-      this._angle-=3;
+      this._angle-=1;
     } else if(direction == "right") {
-      this._angle+=3;
+      this._angle+=1;
     }
   }
 

@@ -34,6 +34,7 @@ export default class Model extends THREE.Object3D {
     // 本体
     let m = this._createBodyMaterial(materials);
     this._mesh = new THREE.SkinnedMesh(geometry, m, false);
+    this._mesh.castShadow = true;
     this.add(this._mesh);
 
     // エッジ
@@ -50,12 +51,12 @@ export default class Model extends THREE.Object3D {
 
     // ミキサー
     this._mixer = new THREE.AnimationMixer(this._mesh);
-    this._action.idle = this._mixer.clipAction(geometry.animations[2]);
+    this._action.idle = this._mixer.clipAction(geometry.animations[1]);
     this._action.idle.setEffectiveWeight(1);
 
     // ミキサー2
     this._mixer2 = new THREE.AnimationMixer(this._edgeMesh);
-    this._action.idle2 = this._mixer2.clipAction(geometry.animations[2]);
+    this._action.idle2 = this._mixer2.clipAction(geometry.animations[1]);
     this._action.idle2.setEffectiveWeight(1);
   }
 

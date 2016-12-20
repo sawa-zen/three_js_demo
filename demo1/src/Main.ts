@@ -56,16 +56,19 @@ class Main {
     this._renderDom = document.getElementById('renderCanvas');
     this._renderer = new THREE.WebGLRenderer({antialias: true});
     this._renderer.setClearColor(0x83a3b7);
-    this._renderer.setPixelRatio(window.devicePixelRatio);
+    this._renderer.setPixelRatio(1);
+    this._renderer.shadowMap.enabled = true;
     this._resize();
     this._renderDom.appendChild(this._renderer.domElement);
 
     // 環境光
     let light = new THREE.DirectionalLight(0xffffff, 1);
+    light.castShadow = true;
     this._scene.add(light);
 
     // スポットライト
     this._spotLight = SpotLight.getInstance();
+    this._spotLight.castShadow = true;
     //this._scene.add(this._spotLight);
 
     // 地面
@@ -127,6 +130,8 @@ class Main {
       // キャラ
       this._chara.update();
     }
+
+    this._plane.update();
 
     // FPSを30に
     if(this._frame % 2) {

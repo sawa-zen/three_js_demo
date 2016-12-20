@@ -12,7 +12,7 @@ export default class SpotLight extends THREE.SpotLight {
   /** アニメーションに用いる角度の値です。 */
   private _angle:number = 0;
   /** アニメーションの円軌道の半径です。 */
-  private _radius:number = 50;
+  private _radius:number = 100;
 
   /**
    * コンストラクター
@@ -20,7 +20,7 @@ export default class SpotLight extends THREE.SpotLight {
    */
   constructor() {
     super(0xffffff);
-    this.position.set( 10, 40, 30 );
+    this.position.set( 10, 40, 50 );
     this.castShadow = true;
     this.shadow.mapSize.width = 64;
     this.shadow.mapSize.height = 64;
