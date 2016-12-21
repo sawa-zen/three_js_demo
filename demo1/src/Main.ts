@@ -133,10 +133,10 @@ class Main {
 
     this._plane.update();
 
-    // FPSを30に
-    if(this._frame % 2) {
-      return;
-    }
+    // // FPSを30に
+    // if(this._frame % 2) {
+    //   return;
+    // }
 
     // Statsの計測を開始
     this._stats.begin();
