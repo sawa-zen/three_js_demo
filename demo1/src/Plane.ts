@@ -30,11 +30,4 @@ export default class Plane extends THREE.Object3D {
     mesh.receiveShadow = true;
     this.add(mesh);
   }
-
-  /**
-   * 更新します。
-   */
-  public update() {
-    this._texture.offset.y -= 0.006;
-  }
 }

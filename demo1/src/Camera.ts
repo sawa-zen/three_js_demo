@@ -6,7 +6,7 @@ export default class Camera extends THREE.PerspectiveCamera {
   /** アニメーションに用いる角度の値です。 */
   private _angle:number = 0;
   /** アニメーションの円軌道の半径です。 */
-  private _radius:number = 15;
+  private _radius:number = 30;
 
   /**
    * コンストラクターです。
@@ -35,9 +35,7 @@ export default class Camera extends THREE.PerspectiveCamera {
    */
   public update() {
     let lad = this._angle * Math.PI / 180;
-    this.position.x = this._radius * Math.sin(lad);
     this.position.z = this._radius * Math.cos(lad);
-    this.lookAt(new THREE.Vector3(0, 1.5, 0));
   }
 
 }

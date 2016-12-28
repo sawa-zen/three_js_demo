@@ -41,11 +41,6 @@ export default class Model extends THREE.Object3D {
     this._edgeMesh = new THREE.SkinnedMesh(geometry, this._createEdgeMaterial(), false);
     this.add(this._edgeMesh);
 
-    // ボーン
-    this._helper = new THREE.SkeletonHelper(this._mesh);
-    //this.add(this._helper);
-    //this._helper.update();
-
     // クロック
     this._clock = new THREE.Clock();
 
@@ -240,18 +235,42 @@ export default class Model extends THREE.Object3D {
   }
 
   /**
+   * 左に動きます。
+   */
+  public moveLeft():void {
+    this.position.x -= 0.15;
+    this.rotation.y = -Math.PI / 2;
+  }
+
+  /**
+   * 右に動きます。
+   */
+  public moveRight():void {
+    this.position.x += 0.15;
+    this.rotation.y = Math.PI / 2;
+  }
+
+  /**
+   * ジャンプします。
+   */
+  public jump():void
+  {
+
+  }
+
+  /**
    * アニメーションを開始させる
    */
   public play():void {
-		this._action.idle.play();
-		this._action.idle2.play();
+    this._action.idle.play();
+    this._action.idle2.play();
   }
 
   /**
    * アニメーションを停止させる
    */
   public stop():void {
-		this._action.idle.stop();
-		this._action.idle2.stop();
+    this._action.idle.stop();
+    this._action.idle2.stop();
   }
 }

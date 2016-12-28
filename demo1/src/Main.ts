@@ -94,12 +94,10 @@ class Main {
     this._onPushRight = this._onPushRight.bind(this)
     this._onRelase = this._onRelase.bind(this);
     this._onClickA = this._onClickA.bind(this);
-    this._onClickB = this._onClickB.bind(this);
     zenpad.addEventListener('pushLeft', this._onPushLeft);
     zenpad.addEventListener('pushRight', this._onPushRight);
     zenpad.addEventListener('releasePad', this._onRelase);
     zenpad.addEventListener('clickA', this._onClickA);
-    zenpad.addEventListener('clickB', this._onClickB);
 
     this._tick();
 
@@ -119,9 +117,13 @@ class Main {
     this._frame++;
 
     // カメラの更新
-    if(this._moveDirection) {
-      this._camera.rotate(this._moveDirection);
+    if(this._moveDirection == 'left') {
+      this._chara.moveLeft();
+    } else if(this._moveDirection == 'right') {
+      this._chara.moveRight();
     }
+    this._camera.position.x = this._chara.position.x;
+    this._camera.lookAt(this._chara.position);
     this._camera.update();
     // スポットライトの更新
     this._spotLight.update();
@@ -130,13 +132,6 @@ class Main {
       // キャラ
       this._chara.update();
     }
-
-    this._plane.update();
-
-    // // FPSを30に
-    // if(this._frame % 2) {
-    //   return;
-    // }
 
     // Statsの計測を開始
     this._stats.begin();
@@ -159,6 +154,7 @@ class Main {
    */
   protected _onPushLeft():boolean {
     this._moveDirection = 'left';
+    this._chara.play();
     return true;
   }
 
@@ -167,6 +163,7 @@ class Main {
    */
   protected _onPushRight():boolean {
     this._moveDirection = 'right';
+    this._chara.play();
     return true;
   }
 
@@ -175,6 +172,7 @@ class Main {
    */
   protected _onRelase():boolean {
     this._moveDirection = null;
+    this._chara.stop();
     return true;
   }
 
@@ -183,14 +181,6 @@ class Main {
    */
   protected _onClickA():boolean {
     this._chara.play();
-    return true;
-  }
-
-  /**
-   * Bボタン押下時のハンドラーです。
-   */
-  protected _onClickB():boolean {
-    this._chara.stop();
     return true;
   }
 
