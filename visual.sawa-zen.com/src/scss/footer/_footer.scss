@@ -1,0 +1,124 @@
+@mixin Footer {
+  .Footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: $COLOR_BLACK;
+    color: $COLOR_WHITE;
+
+    display: flex;
+    justify-content: space-between;
+
+    .FooterCorp {
+      margin-left: 20px;
+      margin-right: 10px;
+      display: flex;
+      align-items: center;
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+
+    .FooterCreated {
+      margin-right: 20px;
+      height: $FOOTER_HEIGHT;
+      display: flex;
+      align-items: center;
+
+      font-size: $FONT_SIZE_VERY_SMALL;
+      @media (max-width: $MEDIA_MD) {
+        font-size: 0.6em;
+      }
+
+      a, a:hover, a:visited, a:active {
+        color: #CCC;
+        text-decoration: none;
+      }
+    }
+
+    .share {
+      display: flex;
+      -webkit-justify-content: flex-end;
+      justify-content: flex-end;
+      align-items: center;
+      margin: 0 3px 0 0;
+      box-sizing: border-box;
+      list-style: none;
+      flex-grow: 1;
+      -webkit-flex-grow: 1;
+
+      li {
+        overflow: hidden;
+        border-radius: 3px;
+
+        a {
+          display: block;
+          width: 100%;
+          height: 100%;
+          position: relative;
+
+          img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 25px;
+            height: 25px;
+            margin: auto;
+          }
+        }
+
+        &.twitter { background-color: #55acee; }
+        &.facebook { background-color: #315096; }
+        &.hatena { background-color: #008fde; }
+        &.line { background-color: #00C300; }
+      }
+    }
+
+    // スマホ用
+    @media (max-width: $MEDIA_MD) {
+      height: $FOOTER_HEIGHT_SP;
+      .FooterCorp {
+        margin-left: 10px;
+        height: $FOOTER_HEIGHT_SP;
+        img {
+          height: 14px;
+          width: auto;
+        }
+      }
+      .share {
+        li {
+          margin: 0 2px;
+          width: 30px;
+          height: 30px;
+          a {
+            img {
+              width: 20px;
+              height: 20px;
+            }
+          }
+        }
+      }
+    }
+
+    // PC用
+    @media (min-width: $MEDIA_MD) {
+      height: $FOOTER_HEIGHT;
+      .FooterCorp {
+        margin-left: 20px;
+        height: $FOOTER_HEIGHT;
+      }
+      .share {
+        li {
+          margin: 0 5px;
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+  }
+}

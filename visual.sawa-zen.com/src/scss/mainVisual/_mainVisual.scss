@@ -1,0 +1,53 @@
+@import "./timer";
+
+@mixin MainVisual {
+  .MainVisual {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    &Three {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    &CreatedBy {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      color: $COLOR_WHITE;
+      font-weight: 100;
+      box-sizing: border-box;
+      color: $COLOR_BLACK;
+      font-style: italic;
+      text-align: right;
+      user-select: none;
+      a {
+        color: $COLOR_BLACK;
+      }
+    }
+
+    @include Timer;
+
+    // スマホ用
+    @media (max-width: $MEDIA_MD) {
+      bottom: 0;
+      &CreatedBy {
+        padding: 10px;
+      }
+    }
+
+    // PC用
+    @media (min-width: $MEDIA_MD) {
+      bottom: 0;
+      &CreatedBy {
+        padding: $MARGIN_MIDDLE;
+      }
+    }
+  }
+}

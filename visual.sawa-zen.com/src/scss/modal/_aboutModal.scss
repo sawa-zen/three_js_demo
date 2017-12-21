@@ -1,0 +1,68 @@
+@mixin AboutModal {
+  .AboutModal {
+    h2 {
+      font-family: "Roboto", sans-serif;
+      font-weight: 100;
+      border-bottom: 1px solid #FFF;
+      font-style: italic;
+      pointer-events: none;
+    }
+
+    p {
+      margin-bottom: 20px;
+    }
+
+    &Body {
+      img {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: rgba(255, 255, 255, 0.2);
+        box-sizing: border-box;
+      }
+    }
+
+    &Link {
+      color: $COLOR_WHITE;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    // スマホ用
+    @media (max-width: $MEDIA_MD) {
+      h2 {
+        font-size: 10vmin;
+        margin-bottom: 5vmin;
+      }
+
+      &Body {
+        font-size: 3vmin;
+        line-height: 6vmin;
+        font-family: inherit;
+        img {
+          padding: 10px;
+          margin-bottom: 10px;
+        }
+      }
+    }
+
+    // PC用
+    @media (min-width: $MEDIA_MD) {
+      h2 {
+        font-size: 5em;
+        margin-bottom: 30px;
+      }
+
+      &Body {
+        font-size: 1.3em;
+        line-height: 2em;
+        font-family: inherit;
+        img {
+          padding: 20px;
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+}

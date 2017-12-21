@@ -1,0 +1,110 @@
+@mixin Header {
+  .Header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: 10px;
+    color: $COLOR_WHITE;
+    box-sizing: border-box;
+    font-weight: 100;
+
+    &Background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      // background-color: rgba(255, 255, 255, 0.2);
+      mix-blend-mode: overlay;
+    }
+
+    &Content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      -webkit-align-items: center;
+      align-items: center;
+    }
+
+    &Logo {
+      display: block;
+      height: 100%;
+      user-select: none;
+      &.black {
+        display: none;
+      }
+      &.white {
+        display: inline-block;
+      }
+    }
+
+    &Button {
+      cursor: pointer;
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+      &Text {
+        padding: 0 5px;
+        align-self: auto;
+        border-bottom: 0.5px solid rgba(255, 255, 255, 0.5);
+        color: $COLOR_WHITE;
+        font-family: "Roboto", sans-serif;
+        font-weight: 100;
+        font-style: italic;
+      }
+    }
+    // スマホ用
+    @media (max-width: $MEDIA_MD) {
+      height: 49px;
+      &Content {
+        padding: 10px;
+      }
+      &Logo {
+        margin-right: 20px;
+      }
+      &Button {
+        margin: 0 5px;
+        font-size: 1.2em;
+      }
+    }
+    // PC用
+    @media (min-width: $MEDIA_MD) {
+      height: 100px;
+      &Content {
+        padding: $MARGIN_MIDDLE;
+      }
+      &Logo {
+        margin-right: 40px;
+      }
+      &Button {
+        margin: 0 10px;
+        font-size: 1.7em;
+      }
+    }
+
+    // ワイヤーフレーム表示の場合
+    &.wireframe {
+      color: $COLOR_BLACK;
+      .HeaderButton {
+        &Text {
+          color: $COLOR_BLACK;
+          border-color: rgba(0, 0, 0, 0.5);
+        }
+      }
+
+      .HeaderLogo {
+        &.black {
+          display: inline-block;
+        }
+        &.white {
+          display: none;
+        }
+      }
+    }
+  }
+}

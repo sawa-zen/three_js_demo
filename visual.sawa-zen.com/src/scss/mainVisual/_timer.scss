@@ -1,0 +1,82 @@
+@mixin Timer {
+  .Timer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: $COLOR_WHITE;
+    font-weight: 100;
+    pointer-events: none;
+    user-select: none;
+
+    font-style: italic;
+
+    &Title {
+      padding: 0 40px 10px;
+      font-size: 6vmin;
+      line-height: 7vmin;
+      @media (max-width: $MEDIA_MD) {
+        padding: 0 20px 10px;
+        font-size: 10vmin;
+        line-height: 11vmin;
+      }
+      mix-blend-mode: overlay;
+    }
+
+    &Open {
+      padding: 0 40px 10px;
+      font-size: 15vmin;
+
+      @media (max-width: $MEDIA_MD) {
+        padding: 0 20px 10px;
+        font-size: 25vmin;
+      }
+
+      mix-blend-mode: overlay;
+      .TimerOpenUnit {
+        font-size: 10vmin;
+      }
+    }
+
+    &Remain {
+      display: flex;
+      padding: 10px 40px;
+      font-size: 8vmin;
+
+      @media (max-width: $MEDIA_MD) {
+        padding: 10px 20px;
+        font-size: 11vmin;
+      }
+
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      user-select: none;
+      cursor: default;
+
+      font-family: "Roboto", sans-serif;
+      font-weight: 100;
+
+      background-color: rgba(255, 255, 255, 0.2);
+
+      //-webkit-backdrop-filter: blur(32px);
+      mix-blend-mode: overlay;
+
+      .TimerRemainNumber {
+        font-size: 1.0em;
+        text-align: right;
+
+      }
+      .TimerRemainUnit {
+        font-size: 0.25em;
+        text-align: right;
+        margin-right: 0.5rem;
+        color: rgba(255, 255, 255, 0.75);
+      }
+
+      .TimerRemainDay {
+
+      }
+    }
+  }
+
+}

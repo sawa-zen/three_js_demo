@@ -1,0 +1,39 @@
+{
+  "scripts": {
+    "start": "npm run watch & npm run lite",
+    "lite": "lite-server",
+    "build": "npm run build:js && npm run build:scss",
+    "build:js": "browserify src/js/AppBootstrap.js -t babelify -g [envify --NODE_ENV production] -g uglifyify -p bundle-collapser/plugin | uglifyjs -c -m > public/js/bundle.js",
+    "build:scss": "node-sass src/scss --output public/css --output-style compressed",
+    "watch": "npm run watch:js & npm run watch:scss",
+    "watch:js": "watchify src/js/AppBootstrap.js -t babelify -d --outfile public/js/bundle.js",
+    "watch:scss": "node-sass src/scss --output public/css -w --source-map true",
+    "postinstall": "npm run build"
+  },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "eventemitter3": "^2.0.3",
+    "lodash": "^4.17.4",
+    "mobile-detect": "^1.3.6",
+    "moment": "^2.18.1",
+    "react": "^15.5.4",
+    "react-addons-css-transition-group": "^15.5.2",
+    "react-dom": "^15.5.4",
+    "react-tap-event-plugin": "^2.0.1",
+    "three": "^0.85.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^7.3.0",
+    "browserify": "^13.3.0",
+    "bundle-collapser": "^1.2.1",
+    "envify": "^4.0.0",
+    "lite-server": "^2.3.0",
+    "node-sass": "^4.5.3",
+    "uglifyify": "^3.0.4",
+    "watchify": "^3.9.0"
+  }
+}

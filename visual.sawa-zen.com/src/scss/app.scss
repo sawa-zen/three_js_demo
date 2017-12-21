@@ -1,0 +1,27 @@
+@import "./reset";
+@import "./const";
+@import "./common/common";
+@import "./mainVisual/mainVisual";
+@import "./header/header";
+@import "./footer/footer";
+@import "./modal/aboutModal";
+
+html, body, #main, .App {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+
+.App {
+  position: relative;
+
+  @include MainVisual;
+  @include Header;
+  @include Footer;
+  @include AboutModal;
+}
