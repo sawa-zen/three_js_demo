@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>EscapeGame</title>
+  <script src="../dist/points.js"></script>
+</head>
+<style>
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.contents {
+  position: absolute;
+  height: 100vh;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+</style>
+<body>
+  <div id="wrapper"></div>
+  <script>
+    var points = new Points();
+    var wrapper = document.getElementById('wrapper');
+    wrapper.appendChild(points.domElement);
+    points.resize(wrapper.clientWidth, wrapper.clientHeight);
+  </script>
+</body>
+</html>

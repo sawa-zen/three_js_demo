@@ -1,4 +1,4 @@
-import * as THREE from './three';
+import * as SHREE from 'shree';
 import Particles from './Particles';
 import Stats from './Stats';
 
@@ -14,18 +14,18 @@ class Points {
     this._stats = new Stats();
 
     // レンダラー
-    this._renderer = new THREE.WebGLRenderer({ antialias: false });
-    this._renderer.setClearColor(0xFFFFFF, 1);
-    this._renderer.setPixelRatio(1);
+    this._renderer = new SHREE.Renderer({ antialias: false });
+    this._renderer.clearColor = [1.0, 1.0, 1.0, 1.0];
+    this._renderer.pixelRatio = 1;
 
     // カメラ
-    this._camera = new THREE.PerspectiveCamera(90);
+    this._camera = new SHREE.Camera();
     this._camera.position.y = 10;
     this._camera.position.z = 40;
     this._camera.rotation.x = -1;
 
     // シーン
-    this._scene = new THREE.Scene();
+    this._scene = new SHREE.Scene();
 
     // パーティクル群
     this._particles = new Particles();
@@ -36,8 +36,6 @@ class Points {
   }
 
   resize(w, h) {
-    this._camera.aspect = w / h;
-    this._camera.updateProjectionMatrix();
     this._renderer.setSize(w, h);
   }
 
